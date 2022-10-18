@@ -4,10 +4,10 @@
 // File:    expo.scad
 // Project: General
 // License: CC BY-NC-SA 4.0 (Attribution-NonCommercial-ShareAlike)
-// Desc:    Exponential curve shape.
+// Desc:    Exponential curve shape
 //
 
-// Curvature for arm
+// Default curvature for exponential function (for demos)
 expo_default_curvature = 10;
 
 // expo:
@@ -16,6 +16,7 @@ expo_default_curvature = 10;
 //
 module expo( size, curvature ) {
   assert( is_num(size) || (is_list(size) && (len(size) == 2 || len(size) == 3)) );
+  assert( is_num(curvature) && curvature != 0 );
 
   w = is_num(size) ? size : size.x;
   h = is_num(size) ? size : size.y;
@@ -23,8 +24,6 @@ module expo( size, curvature ) {
   assert( is_num(w) && w > 0 );
   assert( is_num(h) && h > 0 );
   assert( !is_list(size) ? true : ((len(size) == 2) || is_num(size.z)) );
-
-  assert( is_num(curvature) && curvature != 0 );
 
   // Artificial starting point
   artificial_start = 0.01;
