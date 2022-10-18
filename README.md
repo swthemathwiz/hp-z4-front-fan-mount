@@ -16,7 +16,7 @@ TBD
 
 ## What You'll Need
 
-### One 92mm x 25mm HP-Compatible Fan
+### One 92 mm x 25 mm HP-Compatible Fan
 
 Generally, you'll want to buy or scavenge an HP-compatible PWM 12VDC fan that
 has the HP-specific 4-pin connector and a cable length of around 6 inches.
@@ -49,7 +49,7 @@ thread. Oh, skip the plastic push-pins or rubber connectors.
 ### M6 x ~16 mm Bolt, M6 Nut, and Washer
 
 You'll want to secure the fan mount to the bottom of the drive cage with an M6
-bolt of about 16mm length. Too much longer and you'll run into other parts of
+bolt of about 16 mm length. Too much longer and you'll run into other parts of
 the mount. You can get by with M5 or a \#12 size (1/4" hardware won't fit thru
 the hole). The head style does not matter too much.
 
@@ -67,6 +67,9 @@ After printing, remove the generated supports (6 pieces: two under the bottom
 tangs, two under the top tangs, one under the screw arm, and a small horizontal
 top-front piece at the start of the top arms). Clean-up the print with utility
 knife.
+
+As mentioned above, you can print the hardware pack. Use **infill density
+of 100%** if you choose to do this.
 
 ## Installation
 
@@ -156,13 +159,13 @@ folder should now include the following files and directories:
 Models are used to visualize and verify the relative positions of holes and
 mounts during debugging and not necessary for building.
 
-This projects uses a 92mm fan model that was created from [Delta](https://www.delta-fan.com) fan
+This projects uses a 92 mm fan model that was created from [Delta](https://www.delta-fan.com) fan
 models by conversion from the STEP files they provide and converted to stl by 
 [IMAGEtoSTL](https://imagetostl.com/convert/file/stp/to/stl). The models are:
 
-- 92mm x 25mm Fan: file _Delta-AFB0912HH.STL_ from [Delta AFB0912HH](https://www.delta-fan.com/AFB0912HH.html)
-- 80mm x 25mm Fan: file _Delta-AFB0812HH.STL_ from [Delta AFB0812HH](https://www.delta-fan.com/AFB0812HH.html)
-- 120mm x 25mm Fan: file _Delta-AFB1212HH.STL_ from [Delta AFB1212HH](https://www.delta-fan.com/AFB1212HH.html)
+- 92 mm x 25 mm Fan: file _Delta-AFB0912HH.STL_ from [Delta AFB0912HH](https://www.delta-fan.com/AFB0912HH.html)
+- 80 mm x 25 mm Fan: file _Delta-AFB0812HH.STL_ from [Delta AFB0812HH](https://www.delta-fan.com/AFB0812HH.html)
+- 120 mm x 25 mm Fan: file _Delta-AFB1212HH.STL_ from [Delta AFB1212HH](https://www.delta-fan.com/AFB1212HH.html)
 
 ## Also Available on Thingiverse
 
