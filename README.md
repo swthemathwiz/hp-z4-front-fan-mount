@@ -63,9 +63,10 @@ and **infill density of 20%** with **support generation**. In Cura, I use
 "Support Placement" set to "Touching Buildplate" with "Support Overhang Angle"
 set to 45 degrees (the default).
 
-After printing, remove the generated supports (6 pieces - under the 2 bottom
-tangs, the 2 top tangs, the screw arm, and at small horizontal top-front piece
-at the start of the top arms). Clean-up the print with utility knife.
+After printing, remove the generated supports (6 pieces: two under the bottom
+tangs, two under the top tangs, one under the screw arm, and a small horizontal
+top-front piece at the start of the top arms). Clean-up the print with utility
+knife.
 
 ## Installation
 
@@ -159,9 +160,9 @@ This projects uses a 92mm fan model that was created from [Delta](https://www.de
 models by conversion from the STEP files they provide and converted to stl by 
 [IMAGEtoSTL](https://imagetostl.com/convert/file/stp/to/stl). The models are:
 
-- 92mm x 25mm Fan: _Delta-AFB0912HH.STL_ - Delta model [AFB0912HH](https://www.delta-fan.com/AFB0912HH.html)
-- 80mm x 25mm Fan: _Delta-AFB0812HH.STL_ - Delta model [AFB0812HH](https://www.delta-fan.com/AFB0812HH.html)
-- 120mm x 25mm Fan: _Delta-AFB1212HH.STL_ - Delta model [AFB1212HH](https://www.delta-fan.com/AFB1212HH.html)
+- 92mm x 25mm Fan: file _Delta-AFB0912HH.STL_ from [Delta AFB0912HH](https://www.delta-fan.com/AFB0912HH.html)
+- 80mm x 25mm Fan: file _Delta-AFB0812HH.STL_ from [Delta AFB0812HH](https://www.delta-fan.com/AFB0812HH.html)
+- 120mm x 25mm Fan: file _Delta-AFB1212HH.STL_ from [Delta AFB1212HH](https://www.delta-fan.com/AFB1212HH.html)
 
 ## Also Available on Thingiverse
 
