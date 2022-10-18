@@ -129,22 +129,28 @@ machine_cage_screw_hole_diameter = 6;
 // Distance from fan bottom to machine needed to accommodate tab - effectively the height of the bottom catch interface plus a little (mm)
 machine_catch_to_fan_frame_bottom = ceil( bottom_catch_get_above_size().z + 0.2 );
 
-// Distance from drive cage bottom to mid-slot (mm)
+// Distance from drive cage bottom to middle of slots of catch (mm)
 machine_cage_bottom_to_catch_mid = 45; //44;
 
-// Distance of cage screw hole center above top of catch (mm)
+// Distance to cage screw hole center above top of catch (mm)
 machine_cage_screw_hole_to_catch_top = 111.5; //113; //114.5;
 
-// Distance of cage screw hole center from mid-catch slots (mm)
+// Distance to cage screw hole center from mid-catch slots (mm)
 machine_cage_screw_hole_to_catch_front = -7.0; // -6.5 //-6;
 
 // Position of cage relative to machine reference point
 machine_cage_screw_hole_center = [ machine_cage_bottom_to_catch_mid, machine_cage_screw_hole_to_catch_top, machine_cage_screw_hole_to_catch_front ];
 
-// Position of mid-point of the two top insertion tabs from machine origin
-machine_tabs_to_catch_top = 135; //134.5; //135; // 134;
-machine_tabs_to_catch_front = 24; //25.5; //25;
+// Distance to center of top tabs from mid-catch slots (mm)
 machine_tabs_to_catch_mid = -7; //-6; //-5; // -7; // -4
+
+// Distance to center of top tabs above top of catch (mm)
+machine_tabs_to_catch_top = 135; //134.5; //135; // 134;
+
+// Distance to center of top tabs from mid-catch slots (mm)
+machine_tabs_to_catch_front = 24; //25.5; //25;
+
+// Position of mid-point of the two top insertion tabs from machine origin
 machine_tabs_center = [ machine_tabs_to_catch_mid, machine_tabs_to_catch_top, machine_tabs_to_catch_front ];
 
 // Mapping of machine position to build position
@@ -167,7 +173,7 @@ cage_arm_extra_diameter = 0;  // [0:0.5:4]
 cage_arm_extra_width = 0; // [0:0.5:4]
 
 // Tolerance to add to cage arm hole's diameter (mm)
-cage_arm_hole_tolerance = 0.6; // [ 0:.1:2]
+cage_arm_hole_tolerance = 0.5; //0.6; // [ 0:.1:2]
 
 // Decorative adjustment of upper arm (to avoid carveout) (mm)
 cage_arm_upper_arm_adjust = 14; // [ 5:20 ]
@@ -186,20 +192,22 @@ cage_arm_diameter = cage_arm_extra_diameter +
 // Calculated width of the arm (mm)
 cage_arm_width = baffle_effective_side_thickness + cage_arm_extra_width;
 
-// Space behind arm to carve out to allow for nut (mm)
+// Length of space behind arm to carve out to allow for nut (mm)
 cage_arm_rear_carveout = fastener_get_attribute( "M6", "nut_thickness" ) * 2;
 
+// Mid-center of the cage arm hole is calculated from cage hole position less spacing and half-width
 function cage_arm_screw_mate_center() = machine_to_model( machine_cage_screw_hole_center ) - [ machine_spacing_cage_to_baffle + cage_arm_width/2, 0, 0 ];
 
 /* [Top Tabs] */
 
+// Base width of the tab (mm)
 tab_base_width = 32; // [ 15:60 ]
 
+// Left/Right balance of the base (%)
 tab_base_balance = 35; // [ 10:50 ]
 
+// Degree of arm exponential curvature
 tab_curvature = 10; // [1:200]
-
-function fan_center_to_edge_of_baffle() = baffle_total_size.x/2;
 
 // show_fan_model: show fan model in position on mount or alone
 module show_fan_model(transparency=0.25) {
@@ -223,7 +231,7 @@ module show_machine(transparency=0.25) {
 
   // Show the cage screw position as a sphere
   color( "black", transparency )
-    translate( machine_to_model( machine_cage_screw_hole_center ) )
+    translate( machine_to_model( machine_cage_screw_hole_center ) + [cage_arm_puff-machine_spacing_cage_to_baffle, 0, 0 ] )
       sphere( d=machine_cage_screw_hole_diameter );
 
   // Show top catch slot positions
