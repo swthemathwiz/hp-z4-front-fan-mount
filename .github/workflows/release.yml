@@ -1,0 +1,19 @@
+name: 'Release with STLs'
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Build
+      uses: swthemathwiz/openscad-actions/build@v1
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        body: New Release
+        files: '*.stl'
+        generate_release_notes: true
