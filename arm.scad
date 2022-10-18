@@ -9,68 +9,16 @@
 
 include <smidge.scad>;
 include <pair.scad>;
+include <expo.scad>;
 
 // Curvature for arm
-expo_default_curvature = 10;
-
-// expo:
-//
-// Asymtotic exponential function builds a model of size (either 2D or 3D)
-//
-module expo( size, curvature ) {
-  assert( is_num(size) || (is_list(size) && (len(size) == 2 || len(size) == 3)) );
-
-  w = is_num(size) ? size : size.x;
-  h = is_num(size) ? size : size.y;
-
-  assert( is_num(w) && w > 0 );
-  assert( is_num(h) && h > 0 );
-  assert( !is_list(size) ? true : ((len(size) == 2) || is_num(size.z)) );
-
-  assert( is_num(curvature) && curvature != 0 );
-
-  // Artificial starting point
-  artificial_start = 0.01;
-
-  function asym_raw(x,s) = 1-exp(-x/s) / x;
-  function asym(x,s) = asym_raw( x/w+artificial_start*s, s );
-
-  // Determine the number of steps
-  endpoint = w;
-  step     = endpoint / ($fn == 0 ? 180/$fa : $fn);
-
-  // Set up to scale function results
-  peak  = asym( endpoint, abs(curvature) );
-  sub   = asym( 0, abs(curvature) );
-  mult  = h/(peak - sub);
-  function scale_function(y) = (y-sub)*mult;
-
-  // Generate the points
-  coords = [ for( x = [ 0 : step : +endpoint+step/2 ] ) [ x, scale_function(asym(x,abs(curvature)) ) ] ];
-
-  // Patch endpoints to [ 0, 0 ] .. [ 0, h ], add return to [w,0] at the end for polygon
-  coords_min_index = 0;
-  coords_max_index = len(coords);
-  coords_patched = [ for( i = [coords_min_index:coords_max_index] ) i == coords_max_index ? [ w, 0 ] : [ coords[i].x, (i == coords_min_index) ? 0 : ((i == coords_max_index-1) ? h : coords[i].y) ] ];
-
-  // Reflect function about x=y
-  function is_terminus( p ) = p.x == w && p.y == 0;
-  function reflect_function(p) = curvature >= 0 || is_terminus(p) ? p : [ p.y/h*w, p.x/w*h ];
-  coords_reflect = [ for( p = coords_patched ) reflect_function(p) ];
-
-  // Create the polygon
-  //echo( concat( coords_reflect ) );
-  if( is_list(size) && len(size) == 3 )
-    linear_extrude( height=size.z ) polygon( coords_reflect );
-  else
-    polygon( coords_reflect );
-} // end expo
+arm_default_curvature = 10;
 
 // arm:
 //
 // Simple curved arm.
 //
-module arm( size, base_thickness, tip_thickness, curvature=expo_default_curvature ) {
+module arm( size, base_thickness, tip_thickness, curvature=arm_default_curvature ) {
   assert( is_list( size ) && len(size) >= 2 && len(size) <= 3 );
   assert( is_num(size[0]) && is_num(size[1]) && (len(size) == 2 || is_num(size[2])) );
 
@@ -94,7 +42,7 @@ module arm( size, base_thickness, tip_thickness, curvature=expo_default_curvatur
 //
 // Mixed curved and straight arm.
 //
-module arm_mixed( size, base_thickness, tip_thickness, straight_percentage=0, curvature=expo_default_curvature ) {
+module arm_mixed( size, base_thickness, tip_thickness, straight_percentage=0, curvature=arm_default_curvature ) {
   assert( is_num(straight_percentage) );
   assert( straight_percentage >= 0 && straight_percentage <= 100 );
 
@@ -129,7 +77,7 @@ module arm_mixed( size, base_thickness, tip_thickness, straight_percentage=0, cu
 //   tang_profile - tang dimensions   - x = percentage tip thickness, y = angle, z = pivot point
 //   balance      - shift base from side to side
 //
-module arm_tapered( size, base_profile, tip_profile, tang_profile, straight_percentage=0, curvature=expo_default_curvature, balance=50 ) {
+module arm_tapered( size, base_profile, tip_profile, tang_profile, straight_percentage=0, curvature=arm_default_curvature, balance=50 ) {
   assert( is_list( size ) && len(size) == 2 && is_num(size[0]) && is_num(size[1]) );
   assert( is_list( base_profile ) && len(base_profile) == 2 && is_num(base_profile[0]) && is_num(base_profile[1]) );
   assert( is_list( tip_profile ) && len(tip_profile) == 2 && is_num(tip_profile[0]) && is_num(tip_profile[1]) );
@@ -194,8 +142,6 @@ module arm_tapered( size, base_profile, tip_profile, tang_profile, straight_perc
         right_tip_width  = tip_width/2 - tang_length() * (right_base_width - tip_width/2) / size.x;
 
 	linear_extrude( height=total_size.y+2*SMIDGE, center=false, convexity=20 ) {
-	  //polygon( [[-SMIDGE,+max_width/2+SMIDGE], [-SMIDGE,+left_base_width +SMIDGE], [total_size.x+SMIDGE,+tip_width/2+SMIDGE], [total_size.x+SMIDGE,+max_width/2+SMIDGE]] );
-	  //polygon( [[-SMIDGE,-max_width/2-SMIDGE], [-SMIDGE,-right_base_width-SMIDGE], [total_size.x+SMIDGE,-tip_width/2-SMIDGE], [total_size.x+SMIDGE,-max_width/2-SMIDGE]] );
 	  polygon( [[-SMIDGE,+max_width/2+SMIDGE], [-SMIDGE,+left_base_width +SMIDGE], [total_size.x+SMIDGE,+left_tip_width +SMIDGE], [total_size.x+SMIDGE,+max_width/2+SMIDGE]] );
 	  polygon( [[-SMIDGE,-max_width/2-SMIDGE], [-SMIDGE,-right_base_width-SMIDGE], [total_size.x+SMIDGE,-right_tip_width-SMIDGE], [total_size.x+SMIDGE,-max_width/2-SMIDGE]] );
 	}
@@ -246,12 +192,10 @@ module max_polygon_area( polyies ) {
 
   // Find areas
   areas = [ for( p = polyies ) area(p) ];
-  //echo( areas );
 
   // Select maximum area for arm
   function max_index(a, _i = 0) = (_i >= len(a)-1) ? len(a)-1 : let( o = max_index( a, _i+1 ) ) (a[_i] >= a[o] ? _i : o );
   arm = polyies[ max_index( areas ) ];
-  //echo( max_index( areas ), "->", arm );
 
   polygon( arm );
 } // end max_polygon_area
@@ -288,8 +232,6 @@ module arm_to_circle( p1, p2, c, radius, with_circle=true ) {
 } // end arm_to_circle
 
 $fn = 80;
-//color( "blue" ) expo( [40, 20, 1], abs(expo_default_curvature) );
-//color( "red" ) expo( [40, 20, 1], -abs(expo_default_curvature) );
 
 //arm( [ 40, 20, 1 ], 6, 3 );
 //resize( [0,0,10] ) arm_mixed( [ 40, 50, 1 ], 6, 3, 30 );
@@ -297,19 +239,18 @@ $fn = 80;
 //arm_to_circle( [0, 0], [-20, 15], [ +20, +30 ], 4, with_circle=true );
 //arm_to_circle( [50, 0], [-20, 15], [ +20, +30 ], 8 );
 
-//arm_tapered( [30,40], [30,5], [5,2], [75,45,100], curvature=expo_default_curvature, balance=25 );
-//echo( "arm_tapered", size, base_profile, tip_profile, tang_profile, straight_percentage, curvature, balance );
+//arm_tapered( [30,40], [30,5], [5,2], [75,45,100], curvature=arm_default_curvature, balance=25 );
 //
       //tip_profile  = [ slot_size.x,slot_size.y ] - [ 6, 3 ];
 //      tip_profile  = [ slot_size.x,slot_size.y ] - [ 2, 2 ];
 //      base_profile = [ tab_base_width, baffle_side_height_min ];
 //      size         = [ catch_center.z - baffle_attach_top.z, catch_center.y - baffle_attach_top.y + tip_profile.y/2 ];
 //      tang_profile = [ 80, 30, 100 ]
-//arm_tapered( [39.7, 29.6], [32, 5], [9, 4], straight_percentage=0, curvature=expo_default_curvature, balance=35 );
+//arm_tapered( [39.7, 29.6], [32, 5], [9, 4], straight_percentage=0, curvature=arm_default_curvature, balance=35 );
 //   tang_profile - tang dimensions   - x = percentage tip thickness, y = angle, z = pivot point
 // [11,6,11]
 //intersection() {
 //  translate( [ 10, -80, 10 ] ) cube( 100 );
-  rotate( [0,-90,180] ) arm_tapered( [39.7, 29.6], [32, 5], [8, 3], [66,35,70], straight_percentage=0, curvature=expo_default_curvature, balance=35 );
+  rotate( [0,-90,180] ) arm_tapered( [39.7, 29.6], [32, 5], [8, 3], [66,35,70], straight_percentage=0, curvature=arm_default_curvature, balance=35 );
 //}
-//rotate( [0,-90,180] ) translate( [ 0, +20, 0 ] ) arm_tapered( [39.7, 29.6], [32, 5], [8, 3], straight_percentage=0, curvature=expo_default_curvature, balance=35 );
+//rotate( [0,-90,180] ) translate( [ 0, +20, 0 ] ) arm_tapered( [39.7, 29.6], [32, 5], [8, 3], straight_percentage=0, curvature=arm_default_curvature, balance=35 );
