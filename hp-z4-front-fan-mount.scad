@@ -369,49 +369,49 @@ module top_catch_attach() {
   // The machine's tab center position
   catch_center = machine_to_model( machine_tabs_center );
 
+  // If the tabs are going up...
   if( catch_center.y > baffle_total_size.y/2 ) {
-    slot_size    = top_catch_get_slot_size();
-    slot_centers = top_catch_get_slot_centers();
-    tab_balance  = [ tab_base_balance, 100-tab_base_balance ];
+    // Two tab arms with tangs
+    {
+      slot_size    = top_catch_get_slot_size();
+      slot_centers = top_catch_get_slot_centers();
+      tab_balance  = [ tab_base_balance, 100-tab_base_balance ];
 
-    for( i = [0:1] ) {
-      // where to attach this tab on the baffle
-      baffle_attach_top = [ catch_center.x, baffle_total_size.y/2, 0 ] + [ slot_centers[i].x, 0, 0 ];
+      for( i = [0:1] ) {
+	// where to attach this tab horizontally and vertically on the baffle
+	baffle_attach_top = concat( [ catch_center.x, baffle_total_size.y/2 ] + [ slot_centers[i].x, 0 ], 0 );
 
-      //No tang:
-      //tip_profile  = [ slot_size.x, slot_size.y ] - [ 2, 2 ];
-      //center_delta = [ 0, 0 ];
-      //tang_profile = undef;
+	// Get the tip & tang to fit thru together, resting toward top
+	// of the slot, just past metal, with a little play
+	tip_profile  = [ slot_size.x - 2.0, slot_size.y/2 ];
+	center_delta = [ +0.3, +slot_size.y/4 - 0.5 ];
+	tang_profile = [ 80, 30, 70 ];
 
-      // Get the tip & tang to fit thru together, resting toward top
-      // of the slot, just past metal, with a little play
-      tip_profile  = [ slot_size.x - 2.0, slot_size.y/2 ];
-      center_delta = [ +0.3, +slot_size.y/4 - 0.5 ];
-      tang_profile = [ 80, 30, 70 ];
+	// base width is fully adjustable, and base height uses the minimum side height
+	base_profile = [ tab_base_width, baffle_side_height_min ];
 
-      // base width is fully adjustable, and base used the minimum side height
-      base_profile = [ tab_base_width, baffle_side_height_min ];
+	// center_size places the center of the tip of the arm at exactly the mid-point of the entrance to the slot
+	center_size  = [ catch_center.z - baffle_attach_top.z, catch_center.y - baffle_attach_top.y + tip_profile.y/2 ];
 
-      // center_size places the center of the tip of the arm at exactly the mid-point of the entrance to the slot
-      center_size  = [ catch_center.z - baffle_attach_top.z, catch_center.y - baffle_attach_top.y + tip_profile.y/2 ];
-
-      translate( baffle_attach_top )
-	rotate( [ -90, 270, 0 ] )
-	  arm_tapered( center_size + center_delta, base_profile, tip_profile, tang_profile, curvature=tab_curvature, balance=tab_balance[i] );
+	translate( baffle_attach_top )
+	  rotate( [ -90, 270, 0 ] )
+	    arm_tapered( center_size + center_delta, base_profile, tip_profile, tang_profile, curvature=tab_curvature, balance=tab_balance[i] );
+      }
     }
 
-    // Top stopper
+    // Middle stopper is between the two arms
     {
-      box_size   = top_catch_get_box_size();
-      box_center = top_catch_get_box_center();
+      stopper_size   = top_catch_get_box_size();
+      stopper_center = top_catch_get_box_center();
 
-      // where to attach this tab on the baffle
-      baffle_attach_top = [ catch_center.x, baffle_total_size.y/2, 0 ] + [ box_center.x, 0, 0 ];
+      // where to attach the stopper horizontally and vertically on the baffle
+      baffle_attach_top = concat( [ catch_center.x, baffle_total_size.y/2 ] + [ stopper_center.x, 0 ], 0 );
 
-      center_delta = [ box_size.z - 0.5, 0 ];
-      tip_profile  = [ box_size.x, box_size.y ] - [ 1, 1 ];
+      // delta/tip sizing allow a little play between stopper and case
+      center_delta = [ stopper_size.z - 0.5, 0 ];
+      tip_profile  = [ stopper_size.x, stopper_size.y ] - [ 1, 1 ];
 
-      // base width is fully adjustable, and base used the minimum side height
+      // base width is fully adjustable, and base height uses the minimum side height
       base_profile = [ tab_stopper_width, baffle_side_height_min ];
 
       // center_size places the center of the tip of the arm at exactly the mid-point of the entrance to the slot
@@ -466,22 +466,9 @@ module cage_arm_attach() {
       }
 
       // Puff out the arm so that it is flush against the cage
-      if( cage_arm_puff > 0 ) {
-        if( false ) {
-	  puff_small_diameter = cage_arm_puff_diameter;
-	  puff_large_diameter = cage_arm_diameter;
-
-	  // Slanted
-	  translate( [ 0,0, cage_arm_width/2 ] )
-	    linear_extrude( height = cage_arm_puff, scale = puff_small_diameter/puff_large_diameter )
-	      circle( d=puff_large_diameter );
-	}
-
-        // Straight
+      if( cage_arm_puff > 0 )
         translate( [ 0,0, cage_arm_width/2 ] )
-	  linear_extrude( height = cage_arm_puff )
-	   circle( d=cage_arm_puff_diameter );
-      }
+          cylinder( h=cage_arm_puff, d=cage_arm_puff_diameter );
     }
 
   // Add a brace to the side of the arm
@@ -497,10 +484,9 @@ module cage_arm_hole_deletion() {
   // Drill the hole
   translate( cage_arm_screw_mate_center() - [SMIDGE,0,0] )
     rotate( [0,+90,0] )
-      linear_extrude( height = cage_arm_width+2*cage_arm_puff+4*SMIDGE, center=true )
-      	circle( d=machine_cage_screw_hole_diameter+cage_arm_hole_tolerance );
+      cylinder( h = cage_arm_width+2*cage_arm_puff+4*SMIDGE, d=machine_cage_screw_hole_diameter+cage_arm_hole_tolerance, center=true );
 
-  // Delete enough space for nut
+  // Delete enough extra space for nut
   translate( cage_arm_screw_mate_center() - [cage_arm_rear_carveout + cage_arm_width/2 + SMIDGE, 0, 0 ] )
     rotate( [0,+90,0] )
       cylinder( d=cage_arm_diameter-0.5, h=cage_arm_rear_carveout );
