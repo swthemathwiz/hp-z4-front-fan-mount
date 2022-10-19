@@ -4,7 +4,7 @@
 // File:    arm.scad
 // Project: General
 // License: CC BY-NC-SA 4.0 (Attribution-NonCommercial-ShareAlike)
-// Desc:    Curved and straight arm connection.
+// Desc:    Curved and straight arm connectors
 //
 
 include <smidge.scad>;
@@ -112,7 +112,7 @@ module arm_tapered( size, base_profile, tip_profile, tang_profile, straight_perc
     // p => the pivot point on the top
     // h => the indent size
     l = tang_length( y, p, h, a );
-    polygon([ [0,0], [0,y], [p/16,y+h], [p,y+h], [l,+h/2], [l,0] ]);
+    polygon([ [0,0], [0,y+h], [p,y+h], [l,+h/2], [l,0] ]);
   }
 
   difference() {
