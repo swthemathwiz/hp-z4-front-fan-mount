@@ -19,16 +19,17 @@ TBD
 ### One 92 mm x 25 mm HP-Compatible Fan
 
 Generally, you'll want to buy or scavenge an HP-compatible PWM 12VDC fan that
-has the HP-specific 4-pin connector and a cable length of around 6 inches.
+has the HP-specific 4-pin connector and a cable length of at least 6 inches.
 
 The HP fan connector is somewhat proprietary. Older fans tend to have 4
-color-coded wires and a dark red-brown connector. Newer ones seem to have black
-wires with a white connector. Both connectors are keyed on either end of
-the 4-pin connector. If you use an after-market fan, you'll have the change the
-connector to accommodate the HP-style.
+color-coded wires and a reddish-brown connector. Newer ones seem to have black
+wires and a white connector. Both connectors are keyed on either end of
+the 4-pin connector. If you use an after-market fan, at a minimum, you'll have
+the modify the connector to accommodate the HP-style.
 
-I picked up a Foxconn PVA092G12H (0.40A) from ebay that was originally used on a
-Compaq/Z2x0 computer and it works great. A few other choices are Nidec
+I picked up a Foxconn PV902512PSPF (0.40A) (HP part numbers: 435452-001,
+432768-001, 451144-001) from ebay that was originally used on a
+HP Compaq computer and it works great. A few other choices are Nidec
 T92T12MS3A7-57A03 (0.35A) fans from the Z8x0 series (HP part
 numbers: 647113-001, 749598-001, and 782506-001). Also common is the Delta
 AUB0912HH (0.40A). Beware: some of HP's newer case fans have ultra-short cables.
@@ -39,12 +40,12 @@ I have not tested these other fans.
 This is essential - i.e., it's not just for your protection\! The fan guard
 bolts the baffle to the fan and keeps the structure square and strong. Setting
 aside color choice, you want a metal one (not plastic). Some are flat, some
-bulge a little. Silver wire with a bulge matches the CPU fan.
+bulge a little. Silver wire with a bulge matched my CPU fan.
 
 ### Four Case Fan Screws
 
-These seem more or less standard - silver or black, 10 mm in length, very coarse
-thread. Oh, skip the plastic push-pins or rubber connectors.
+These seem more or less standard - silver or black, about 10 mm in length, very
+coarse thread. Oh, skip the plastic push-pins or rubber connectors.
 
 ### M6 x ~16 mm Bolt, M6 Nut, and Washer
 
