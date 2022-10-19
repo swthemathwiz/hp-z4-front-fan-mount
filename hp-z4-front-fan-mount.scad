@@ -4,7 +4,7 @@
 // File:    hp-z4-front-fan-mount.scad
 // Project: HP Z4 G4 Fan Mount
 // License: CC BY-NC-SA 4.0 (Attribution-NonCommercial-ShareAlike)
-// Desc:    SSD to HDD Adapter
+// Desc:    Printable HP Z4 G4 Front Fan Mount
 //
 
 include <smidge.scad>;
@@ -19,7 +19,7 @@ use <arm.scad>;
 /* [General] */
 
 // Show mount or hardware (others for debugging)
-show_selection = "mount"; // [ "mount", "mount/fan", "mount/machine", "hardware", "fan" ]
+show_selection = "mount"; // [ "mount", "mount/fan", "mount/machine", "mount/machine/axis", "hardware", "fan" ]
 
 /* [Fan] */
 
@@ -130,25 +130,28 @@ machine_cage_screw_hole_diameter = 6;
 machine_catch_to_fan_frame_bottom = ceil( bottom_catch_get_above_size().z + 0.2 );
 
 // Distance from drive cage bottom to middle of slots of catch (mm)
-machine_cage_bottom_to_catch_mid = 45; //44;
+machine_cage_bottom_to_catch_mid = 44.0;
 
 // Distance to cage screw hole center above top of catch (mm)
 machine_cage_screw_hole_to_catch_top = 111.5; //113; //114.5;
 
 // Distance to cage screw hole center from mid-catch slots (mm)
-machine_cage_screw_hole_to_catch_front = -7.0; // -6.5 //-6;
+machine_cage_screw_hole_to_catch_front = -7.0; // -6.5
+
+// Inset size between cage bottom to cage screw (mm)
+machine_cage_screw_hole_inset = 1.0; // [0:.1:2]
 
 // Position of cage relative to machine reference point
 machine_cage_screw_hole_center = [ machine_cage_bottom_to_catch_mid, machine_cage_screw_hole_to_catch_top, machine_cage_screw_hole_to_catch_front ];
 
 // Distance to center of top tabs from mid-catch slots (mm)
-machine_tabs_to_catch_mid = -7; //-6; //-5; // -7; // -4
+machine_tabs_to_catch_mid = -6.0;
 
 // Distance to center of top tabs above top of catch (mm)
-machine_tabs_to_catch_top = 135; //134.5; //135; // 134;
+machine_tabs_to_catch_top = 135.0; //134.5; //135; // 134;
 
 // Distance to center of top tabs from mid-catch slots (mm)
-machine_tabs_to_catch_front = 24; //25.5; //25;
+machine_tabs_to_catch_front = 26.1;
 
 // Position of mid-point of the two top insertion tabs from machine origin
 machine_tabs_center = [ machine_tabs_to_catch_mid, machine_tabs_to_catch_top, machine_tabs_to_catch_front ];
@@ -173,13 +176,13 @@ cage_arm_extra_diameter = 0;  // [0:0.5:4]
 cage_arm_extra_width = 0; // [0:0.5:4]
 
 // Tolerance to add to cage arm hole's diameter (mm)
-cage_arm_hole_tolerance = 0.5; //0.6; // [ 0:.1:2]
+cage_arm_hole_tolerance = 0.4; // [ 0:.1:1]
 
-// Decorative adjustment of upper arm (to avoid carveout) (mm)
+// Decorative adjustment of upper arm (to avoid side carve-out) (mm)
 cage_arm_upper_arm_adjust = 14; // [ 5:20 ]
 
 // Amount to puff out arm so that it reaches drill hole (mm)
-cage_arm_puff = machine_spacing_cage_to_baffle + 1.0; // [0:.2:2]
+cage_arm_puff = machine_spacing_cage_to_baffle + machine_cage_screw_hole_inset;
 
 // Diameter of puff out arm that presses against the cage hole (mm)
 // N.B.: less than 3mm to avoid the fold in the case metal
@@ -209,6 +212,9 @@ tab_base_balance = 35; // [ 10:50 ]
 // Degree of arm exponential curvature
 tab_curvature = 10; // [1:200]
 
+// Base width of the stopper (mm)
+tab_stopper_width = 20; // [ 10:50 ]
+
 // show_fan_model: show fan model in position on mount or alone
 module show_fan_model(transparency=0.25) {
   color( "black", transparency )
@@ -217,9 +223,9 @@ module show_fan_model(transparency=0.25) {
 } // end show_fan_model
 
 // show_machine: show machine origin, planes, and attachment element positions
-module show_machine(transparency=0.25) {
+module show_machine(axis=false,transparency=0.25) {
   // Show the machine origin planes
-  if( true )
+  if( axis )
     color( "yellow", transparency/3 )
       translate( machine_to_model( machine_bottom_catch_center ) ) {
 	plane_thickness = 0.1;
@@ -237,7 +243,7 @@ module show_machine(transparency=0.25) {
   // Show top catch slot positions
   color( "black", transparency )
     translate( machine_to_model( machine_tabs_center ) )
-      top_catch_fitting( height=0, tang_style="debug" );
+      top_catch_fitting( height=0, tang_style="debug", box_style="debug" );
 
   // Show bottom catch tab/slots position
   color( "black", transparency )
@@ -346,7 +352,7 @@ module bottom_catch_attach() {
         max_height_depth = max(catch_height,catch_below_size.z);
         translate( [0,0,+max_height_depth] )
 	  cube( [catch_above_size.x, 2*slot_to_baffle_face, 2*max_height_depth], center=true );
-	bottom_catch_fitting(height=catch_height,width=catch_width_meeting_baffle_edge,base_style="trap-front",tang_style="double-complex", tab_style="tapered-hole");
+	bottom_catch_fitting(height=catch_height,width=catch_width_meeting_baffle_edge, base_style="trap-front", tang_style="double-complex", tab_style="double-tapered-hole");
       }
 
   // Add braces
@@ -362,27 +368,26 @@ module bottom_catch_attach() {
 module top_catch_attach() {
   // The machine's tab center position
   catch_center = machine_to_model( machine_tabs_center );
-  slot_size    = top_catch_get_slot_size();
-  slots        = top_catch_get_slot_centers();
-  tab_balance  = [ tab_base_balance, 100-tab_base_balance ];
 
   if( catch_center.y > baffle_total_size.y/2 ) {
-    for( i = [0:1] ) {
-      tab = slots[i];
+    slot_size    = top_catch_get_slot_size();
+    slot_centers = top_catch_get_slot_centers();
+    tab_balance  = [ tab_base_balance, 100-tab_base_balance ];
 
+    for( i = [0:1] ) {
       // where to attach this tab on the baffle
-      baffle_attach_top = [ catch_center.x, baffle_total_size.y/2, 0 ] + [ tab.x, 0, 0 ];
+      baffle_attach_top = [ catch_center.x, baffle_total_size.y/2, 0 ] + [ slot_centers[i].x, 0, 0 ];
 
       //No tang:
       //tip_profile  = [ slot_size.x, slot_size.y ] - [ 2, 2 ];
-      //center_delta = [0, 0 ];
+      //center_delta = [ 0, 0 ];
       //tang_profile = undef;
 
       // Get the tip & tang to fit thru together, resting toward top
       // of the slot, just past metal, with a little play
-      tip_profile  = [ slot_size.x - 2.5, slot_size.y/2 ];
-      center_delta = [ +0.3, +slot_size.y/4 - 1 ];
-      tang_profile = [ 70, 35, 70 ];
+      tip_profile  = [ slot_size.x - 2.0, slot_size.y/2 ];
+      center_delta = [ +0.3, +slot_size.y/4 - 0.5 ];
+      tang_profile = [ 80, 30, 70 ];
 
       // base width is fully adjustable, and base used the minimum side height
       base_profile = [ tab_base_width, baffle_side_height_min ];
@@ -394,6 +399,28 @@ module top_catch_attach() {
 	rotate( [ -90, 270, 0 ] )
 	  arm_tapered( center_size + center_delta, base_profile, tip_profile, tang_profile, curvature=tab_curvature, balance=tab_balance[i] );
     }
+
+    // Top stopper
+    {
+      box_size   = top_catch_get_box_size();
+      box_center = top_catch_get_box_center();
+
+      // where to attach this tab on the baffle
+      baffle_attach_top = [ catch_center.x, baffle_total_size.y/2, 0 ] + [ box_center.x, 0, 0 ];
+
+      center_delta = [ box_size.z - 0.5, 0 ];
+      tip_profile  = [ box_size.x, box_size.y ] - [ 1, 1 ];
+
+      // base width is fully adjustable, and base used the minimum side height
+      base_profile = [ tab_stopper_width, baffle_side_height_min ];
+
+      // center_size places the center of the tip of the arm at exactly the mid-point of the entrance to the slot
+      center_size  = [ catch_center.z - baffle_attach_top.z, catch_center.y - baffle_attach_top.y + tip_profile.y/2 ];
+
+      translate( baffle_attach_top )
+	rotate( [ -90, 270, 0 ] )
+	  arm_tapered( center_size + center_delta, base_profile, tip_profile, curvature=tab_curvature-1 );
+     }
   }
   else
     echo( "Top tabs not possible!!!" );
@@ -439,16 +466,16 @@ module cage_arm_attach() {
       }
 
       // Puff out the arm so that it is flush against the cage
-      if( cage_arm_puff != 0 ) {
+      if( cage_arm_puff > 0 ) {
         if( false ) {
-        puff_small_diameter = cage_arm_puff_diameter;
-        puff_large_diameter = cage_arm_diameter;
+	  puff_small_diameter = cage_arm_puff_diameter;
+	  puff_large_diameter = cage_arm_diameter;
 
-        // Slanted
-        translate( [ 0,0, cage_arm_width/2 ] )
-	  linear_extrude( height = cage_arm_puff, scale = puff_small_diameter/puff_large_diameter )
-	    circle( d=puff_large_diameter );
-        }
+	  // Slanted
+	  translate( [ 0,0, cage_arm_width/2 ] )
+	    linear_extrude( height = cage_arm_puff, scale = puff_small_diameter/puff_large_diameter )
+	      circle( d=puff_large_diameter );
+	}
 
         // Straight
         translate( [ 0,0, cage_arm_width/2 ] )
@@ -599,10 +626,12 @@ if( show_selection == "hardware" )
 else if( show_selection == "fan" )
   show_fan_model();
 else { // shows mount
+  mount();
   if( show_selection == "mount/fan" )
     show_fan_model();
   if( show_selection == "mount/machine" )
-    show_machine();
-  mount();
+    show_machine(axis=false);
+  if( show_selection == "mount/machine/axis" )
+    show_machine(axis=true);
   //top_catch_attach();
 }
