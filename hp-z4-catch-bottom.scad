@@ -54,20 +54,27 @@ bottom_tab_width_overage = 2.0;
 //
 // The tangs are inserted it the slots of catch on the machine.
 //
-module bottom_catch_tang(style) {
+module bottom_catch_tang( style ) {
   complex_straight_height = (style == "double-complex" || style == "single-complex") ? 1.5 : 0;
 
   // Overall size of the tang
   size = [ bottom_tang_multiplier * bottom_slot_size.x, bottom_tang_multiplier * bottom_slot_size.y, (style == "full") ? bottom_tang_multiplier * bottom_slot_size.z : 0.9*bottom_slot_size.z ];
   assert( size.z > complex_straight_height );
 
-  // debug: just cubes (for fitting)
-  if( style == "debug" ) {
+  if( style == "none" ) {
+    ;
+  }
+  // debug: just cubes (for debugging)
+  else if( style == "debug" ) {
     rounded_side_cube_upper( bottom_slot_size, radius=0 );
   }
   // full: straight just scaled by percentage (for fitting)
   else if( style == "full" ) {
     rounded_side_cube_upper( size, bottom_catch_radius/3);
+  }
+  // short: straight just scaled by percentage (for fitting)
+  else if( style == "short" ) {
+    rounded_side_cube_upper( [size.x, size.y, size.z/2], bottom_catch_radius/3);
   }
   // double-slant: slanted on 4-sides
   // double-complex: straight for a little, then slanted on 4-sides
@@ -95,14 +102,18 @@ module bottom_catch_tang(style) {
   }
 } // end bottom_catch_tang
 
-// bottom_catch_bottom_tab_cutout:
+// bottom_catch_bottom_tab_deletion:
 //
 // The machine's vertical tab is inserted into this tab cutout.
 //
-module bottom_catch_bottom_tab_cutout( style, height ) {
+module bottom_catch_bottom_tab_deletion( style, height ) {
   size = bottom_tab_multiplier * bottom_tab_size;
 
-  if( height <= 0 ) {
+  // debug: just cubes (for debugging)
+  if( style == "debug" ) {
+    rounded_side_cube_upper( bottom_tab_size, radius=0 );
+  }
+  else if( style == "none" || height <= 0 ) {
     ;
   }
   // full: fully cutout
@@ -117,19 +128,37 @@ module bottom_catch_bottom_tab_cutout( style, height ) {
     translate( concat( bottom_tab_center - [0,width/2], -SMIDGE ) )
       rounded_side_cube_upper( [ size.x, width, size.z+2*SMIDGE ], bottom_catch_radius/3 );
   }
-  // tapered-hole: a hole with a taper in long direction
+  // tapered-hole: a hole with a taper in width direction
   else if( style == "tapered-hole" ) {
-    width = bottom_tab_width_overage;
+    width        = bottom_tab_width_overage;
     scale_factor = 0.85;
 
     translate( concat( bottom_tab_center - [0,width/2], -SMIDGE ) )
       linear_extrude( height = size.z+2*SMIDGE, scale=[ 1/scale_factor, 1.0] )
 	rounded_side_square( [ size.x * scale_factor, width ], bottom_catch_radius/3, center=true );
   }
-  else {
-    assert( false, "bottom_catch_bottom_tab_cutout: style unknown!" );
+  // double-tapered-hole: a hole with a taper in both directions
+  else if( style == "double-tapered-hole" ) {
+    width        = bottom_tab_width_overage;
+    scale_factor = 0.85;
+
+    translate( concat( bottom_tab_center - [0,width/2], -SMIDGE ) )
+      linear_extrude( height = size.z+2*SMIDGE, scale=[ 1/scale_factor, 1.0 ] )
+        rounded_side_square( [ size.x * scale_factor, width ], bottom_catch_radius/3, center=true );
+
+    // Flare wider at near tab entry point
+    flare_height = size.z/3;
+    flare_factor = 2.0;
+    flare_start_size_x = size.x - size.x * (1 - scale_factor) * (flare_height / size.z);
+
+    translate( concat( bottom_tab_center - [0,width/2], size.z-flare_height-SMIDGE ) )
+      linear_extrude( height = flare_height+2*SMIDGE, scale=[ 1/scale_factor, flare_factor] )
+        rounded_side_square( [ flare_start_size_x, width ], bottom_catch_radius/3, center=true );
   }
-} // end bottom_catch_bottom_tab_cutout
+  else {
+    assert( false, "bottom_catch_bottom_tab_deletion: style unknown!" );
+  }
+} // end bottom_catch_bottom_tab_deletion
 
 // bottom_catch_base:
 //
@@ -138,12 +167,27 @@ module bottom_catch_bottom_tab_cutout( style, height ) {
 module bottom_catch_base( style, height, width ) {
   size = [ bottom_catch_size.x, width, height ];
 
-  if( height <= 0 || width <= 0 ) {
+  if( style == "none" || height <= 0 || width <= 0 ) {
     ;
   }
   // full: straight just scaled by percentage
   else if( style == "full" ) {
     rounded_side_cube_upper( size, bottom_catch_radius );
+  }
+  // layout: test layout the distance to cage / front
+  else if( style == "layout" ) {
+    rounded_side_cube_upper( size, bottom_catch_radius );
+    {
+      catch_center_to_cage = 44;
+      translate( [-catch_center_to_cage/2,0,0] )
+	rounded_side_cube_upper( [catch_center_to_cage, 3, size.z], 0 );
+    }
+    {
+      catch_center_to_front = 26+3.25;
+      catch_center_to_mid   = -6;
+      translate( [-catch_center_to_mid,-catch_center_to_front/2,0] )
+	rounded_side_cube_upper( [3, catch_center_to_front, size.z], 0 );
+    }
   }
   // partial: just two tabs at front
   else if( style == "partial" ) {
@@ -206,14 +250,15 @@ module bottom_catch_fitting(height=3,width=bottom_catch_size.y,base_style="full"
         translate( concat( p, height ) )
           bottom_catch_tang( tang_style );
 
+      // Tab debug means show tab
       if( tab_style == "debug" )
 	translate( concat( bottom_tab_center, -bottom_tab_size.z  ) )
-	  rounded_side_cube_upper( bottom_tab_size, radius=0 );
+	  bottom_catch_bottom_tab_deletion( tab_style, height );
     }
 
-    // Tab cutout
+    // Tab cutout deletion (except for debug)
     if( tab_style != "debug" )
-      bottom_catch_bottom_tab_cutout( tab_style, height );
+      bottom_catch_bottom_tab_deletion( tab_style, height );
   }
 } // end bottom_catch_fitting
 
@@ -229,5 +274,7 @@ $fn = 32;
 //bottom_catch_fitting(height=3,base_style="full",tang_style="full", tab_style="hole");
 //bottom_catch_fitting(height=2.4,base_style="full",tang_style="double-complex", tab_style="tapered-hole");
 //bottom_catch_fitting(height=bottom_tab_size.z,base_style="partial",tang_style="single-complex", tab_style="tapered-hole");
-bottom_catch_fitting(height=bottom_tab_size.z, width=30, base_style="trap-front", tang_style="double-complex", tab_style="tapered-hole");
+//bottom_catch_fitting(height=bottom_tab_size.z, width=30, base_style="trap-front", tang_style="double-complex", tab_style="tapered-hole");
 //bottom_catch_fitting(height=0, base_style="full", tang_style="debug", tab_style="debug");
+//bottom_catch_fitting(height=bottom_tab_size.z, width=30, base_style="trap-front", tang_style="double-complex", tab_style="double-tapered-hole");
+bottom_catch_fitting(height=3,base_style="layout",tang_style="short", tab_style="hole");
