@@ -121,7 +121,7 @@ baffle_mini_brace_size = 2.5; // [0:0.5:4]
 machine_bottom_catch_center = [ 0, 0, 0 ];
 
 // Space between drive cage and baffle side (mm)
-machine_spacing_cage_to_baffle = 1; //1; //0.5
+machine_spacing_cage_to_baffle = 1;
 
 // Cage screw hole diameter (mm) (larger than 15/64", smaller than 1/4")
 machine_cage_screw_hole_diameter = 6;
@@ -133,13 +133,13 @@ machine_catch_to_fan_frame_bottom = ceil( bottom_catch_get_above_size().z + 0.2 
 machine_cage_bottom_to_catch_mid = 44.0;
 
 // Distance to cage screw hole center above top of catch (mm)
-machine_cage_screw_hole_to_catch_top = 111.5; //113; //114.5;
+machine_cage_screw_hole_to_catch_top = 111.5;
 
 // Distance to cage screw hole center from mid-catch slots (mm)
-machine_cage_screw_hole_to_catch_front = -7.0; // -6.5
+machine_cage_screw_hole_to_catch_front = -7.0;
 
 // Inset size between cage bottom to cage screw (mm)
-machine_cage_screw_hole_inset = 1.0; // [0:.1:2]
+machine_cage_screw_hole_inset = 1.0; // [0:0.1:2]
 
 // Position of cage relative to machine reference point
 machine_cage_screw_hole_center = [ machine_cage_bottom_to_catch_mid, machine_cage_screw_hole_to_catch_top, machine_cage_screw_hole_to_catch_front ];
@@ -148,10 +148,10 @@ machine_cage_screw_hole_center = [ machine_cage_bottom_to_catch_mid, machine_cag
 machine_tabs_to_catch_mid = -6.0;
 
 // Distance to center of top tabs above top of catch (mm)
-machine_tabs_to_catch_top = 135.0; //134.5; //135; // 134;
+machine_tabs_to_catch_top = 135.0;
 
 // Distance to center of top tabs from mid-catch slots (mm)
-machine_tabs_to_catch_front = 26.1;
+machine_tabs_to_catch_front = 26.2;
 
 // Position of mid-point of the two top insertion tabs from machine origin
 machine_tabs_center = [ machine_tabs_to_catch_mid, machine_tabs_to_catch_top, machine_tabs_to_catch_front ];
@@ -582,7 +582,7 @@ module hardware() {
   // Bolt
   distribute( 0 ) {
     length = cage_arm_puff + cage_arm_width + fastener_get_attribute( spec, "nut_thickness" ) + fastener_get_attribute( spec, "washer_thickness" ) + 3;
-    echo( "Suggested Bolt -> M6 of Length (mm) > ", ceil(length) );
+    echo( "Suggested Bolt -> ", fastener_get_attribute( spec, "name" ) ," of Length (mm) > ", ceil(length) );
     shank  = machine_spacing_cage_to_baffle/2;
     fastener_hex_bolt( spec, length, shank );
   }

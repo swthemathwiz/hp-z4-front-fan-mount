@@ -183,7 +183,7 @@ module bottom_catch_base( style, height, width ) {
 	rounded_side_cube_upper( [catch_center_to_cage, 3, size.z], 0 );
     }
     {
-      catch_center_to_front = 26+3.25;
+      catch_center_to_front = 26.2+3.25;
       catch_center_to_mid   = -6;
       translate( [-catch_center_to_mid,-catch_center_to_front/2,0] )
 	rounded_side_cube_upper( [3, catch_center_to_front, size.z], 0 );
