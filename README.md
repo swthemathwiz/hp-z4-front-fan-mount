@@ -18,7 +18,7 @@ TBD
 
 ### One 92 mm x 25 mm HP-Compatible Fan
 
-<img src="../media/media/fan.jpg" width="200px" height="200px" />
+<img src="../media/media/fan.jpg" align="right" width="200px" height="200px" />
 
 Generally, you'll want to buy or scavenge an HP-compatible PWM 12VDC fan that
 has the HP-specific 4-pin connector and a cable length of at least 6 inches.
@@ -42,7 +42,7 @@ cables.
 
 ### One 92 mm Fan Guard
 
-<img align=right" width="200" height="200" src="../media/media/guard.jpg" />
+<img src="../media/media/guard.jpg" align="right" width="200px" height="200px" />
 
 This is essential - i.e., it's not just for your protection\! The fan guard
 bolts the baffle to the fan and keeps the structure square and strong. Setting
@@ -51,14 +51,14 @@ bulge a little. Silver wire with a bulge matched my CPU fan.
 
 ### Four Case Fan Screws
 
-<img align=right" width="100" height="100" src="../media/media/screws.jpg" />
+<img src="../media/media/screws.jpg" align="right" width="100px" height="100px" />
 
 These seem more or less standard - silver or black, about 10 mm in length, very
 coarse thread. Oh, skip the plastic push-pins or rubber connectors.
 
 ### M6 x ~16 mm Bolt, Nut, and Washers
 
-<img align=right" width="100" height="100" src="../media/media/bolt.jpg" />
+<img src="../media/media/bolt.jpg" align="right" width="100px" height="100px" />
 
 You'll want to secure the fan mount to the bottom of the drive cage with an M6
 bolt of about 16 mm length. Too much longer and you'll run into other parts of
