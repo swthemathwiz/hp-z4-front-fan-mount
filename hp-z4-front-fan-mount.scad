@@ -110,7 +110,7 @@ baffle_side_cutout_size = concat( baffle_side_cutout_area, min( baffle_extra_hei
 // Mini brace size (mm)
 baffle_mini_brace_size = 2.5; // [0:0.5:4]
 
-/* [Machine] */
+/* [Machine Locations and Sizes] */
 
 // N.B.: These distances relative to the bottom catch are generally
 //       measured from the "center" of the bottom catch which
@@ -129,6 +129,9 @@ machine_cage_screw_hole_diameter = 6;
 // Distance from fan bottom to machine needed to accommodate tab - effectively the height of the bottom catch interface plus a little (mm)
 machine_catch_to_fan_frame_bottom = ceil( bottom_catch_get_above_size().z + 0.2 );
 
+// Distance from fan front to bottom catch center - moves fan backward and forward, but very limited (mm)
+machine_catch_to_fan_front = fan_frame_width/2;
+
 // Distance from drive cage bottom to middle of slots of catch (mm)
 machine_cage_bottom_to_catch_mid = 44.0;
 
@@ -139,19 +142,19 @@ machine_cage_screw_hole_to_catch_top = 111.5;
 machine_cage_screw_hole_to_catch_front = -7.0;
 
 // Inset size between cage bottom to cage screw (mm)
-machine_cage_screw_hole_inset = 1.0; // [0:0.1:2]
+machine_cage_screw_hole_inset = 1.2; // [0:0.1:2]
 
 // Position of cage relative to machine reference point
 machine_cage_screw_hole_center = [ machine_cage_bottom_to_catch_mid, machine_cage_screw_hole_to_catch_top, machine_cage_screw_hole_to_catch_front ];
 
 // Distance to center of top tabs from mid-catch slots (mm)
-machine_tabs_to_catch_mid = -6.0;
+machine_tabs_to_catch_mid = -5.7;
 
 // Distance to center of top tabs above top of catch (mm)
 machine_tabs_to_catch_top = 135.0;
 
 // Distance to center of top tabs from mid-catch slots (mm)
-machine_tabs_to_catch_front = 26.2;
+machine_tabs_to_catch_front = 26.0;
 
 // Position of mid-point of the two top insertion tabs from machine origin
 machine_tabs_center = [ machine_tabs_to_catch_mid, machine_tabs_to_catch_top, machine_tabs_to_catch_front ];
@@ -159,9 +162,9 @@ machine_tabs_center = [ machine_tabs_to_catch_mid, machine_tabs_to_catch_top, ma
 // Mapping of machine position to build position
 function machine_to_model( p ) = [ p.x + (baffle_total_area.x/2 - machine_cage_screw_hole_center.x) + machine_spacing_cage_to_baffle,
                                    p.y - baffle_overfit_size.y/2 - machine_catch_to_fan_frame_bottom,
-                                   p.z + baffle_thickness + fan_frame_width/2 ];
+                                   p.z + baffle_thickness + machine_catch_to_fan_front ];
 
-/* [Cage Arm] */
+/* [Side Cage Arm] */
 
 // Size of arm fastener
 cage_arm_fastener_size = "M6"; // [ "M6", "UNC-#12", "M5" ]
@@ -179,7 +182,7 @@ cage_arm_extra_width = 0; // [0:0.5:4]
 cage_arm_hole_tolerance = 0.4; // [ 0:.1:1]
 
 // Decorative adjustment of upper arm (to avoid side carve-out) (mm)
-cage_arm_upper_arm_adjust = 14; // [ 5:20 ]
+cage_arm_upper_arm_adjust = 12; // [ 0:20 ]
 
 // Amount to puff out arm so that it reaches drill hole (mm)
 cage_arm_puff = machine_spacing_cage_to_baffle + machine_cage_screw_hole_inset;
@@ -204,7 +207,7 @@ function cage_arm_screw_mate_center() = machine_to_model( machine_cage_screw_hol
 /* [Top Tabs] */
 
 // Base width of the tab (mm)
-tab_base_width = 32; // [ 15:60 ]
+tab_base_width = 28; // [ 15:60 ]
 
 // Left/Right balance of the base (%)
 tab_base_balance = 35; // [ 10:50 ]
@@ -352,7 +355,7 @@ module bottom_catch_attach() {
         max_height_depth = max(catch_height,catch_below_size.z);
         translate( [0,0,+max_height_depth] )
 	  cube( [catch_above_size.x, 2*slot_to_baffle_face, 2*max_height_depth], center=true );
-	bottom_catch_fitting(height=catch_height,width=catch_width_meeting_baffle_edge, base_style="trap-front", tang_style="double-complex", tab_style="double-tapered-hole");
+	bottom_catch_fitting(height=catch_height,width=catch_width_meeting_baffle_edge, base_style="trap-front", tang_style="complex", tab_style="flared-hole" );
       }
 
   // Add braces
@@ -383,7 +386,7 @@ module top_catch_attach() {
 
 	// Get the tip & tang to fit thru together, resting toward top
 	// of the slot, just past metal, with a little play
-	tip_profile  = [ slot_size.x - 2.0, slot_size.y/2 ];
+	tip_profile  = [ slot_size.x - 1.5, slot_size.y/2 ];
 	center_delta = [ +0.3, +slot_size.y/4 - 0.5 ];
 	tang_profile = [ 80, 30, 70 ];
 
@@ -409,7 +412,7 @@ module top_catch_attach() {
 
       // delta/tip sizing allow a little play between stopper and case
       center_delta = [ stopper_size.z - 0.5, 0 ];
-      tip_profile  = [ stopper_size.x, stopper_size.y ] - [ 1, 1 ];
+      tip_profile  = [ stopper_size.x, stopper_size.y ] - [ 0.75, 0 ];
 
       // base width is fully adjustable, and base height uses the minimum side height
       base_profile = [ tab_stopper_width, baffle_side_height_min ];
@@ -419,7 +422,7 @@ module top_catch_attach() {
 
       translate( baffle_attach_top )
 	rotate( [ -90, 270, 0 ] )
-	  arm_tapered( center_size + center_delta, base_profile, tip_profile, curvature=tab_curvature-1 );
+	  arm_tapered( center_size + center_delta, base_profile, tip_profile, curvature=tab_curvature );
      }
   }
   else
