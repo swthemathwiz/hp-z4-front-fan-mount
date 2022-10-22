@@ -2,11 +2,11 @@
 
 ## Introduction
 
-This is a 3D-Printable [OpenSCAD](https://openscad.org/) model of front fan
-mount for an HP Z4 G4 workstation. This is in no way endorsed by HP; we are in
-no way responsible for any damage resulting from its use.
+This is a 3D-Printable [OpenSCAD](https://openscad.org/) model of a front fan
+mount for an HP Z4 G4 workstation. This is in no way endorsed by HP. The
+creator is not responsible for any damage resulting from its use.
 
-## Models and Variations
+## Models
 
 TBD
 
@@ -18,24 +18,31 @@ TBD
 
 ### One 92 mm x 25 mm HP-Compatible Fan
 
+<img align=right" width="200" height="200" src="../media/media/fan.jpg">
+
 Generally, you'll want to buy or scavenge an HP-compatible PWM 12VDC fan that
 has the HP-specific 4-pin connector and a cable length of at least 6 inches.
 
-The HP fan connector is somewhat proprietary. Older fans tend to have 4
-color-coded wires and a reddish-brown connector. Newer ones seem to have black
-wires and a white connector. Both connectors are keyed on either end of
+The HP fan connector is somewhat proprietary. Older fans tend to have
+four color-coded wires and a reddish-brown connector. Newer ones seem to have black
+wires and a white connector. Both connectors are keyed on both ends of
 the 4-pin connector. If you use an after-market fan, at a minimum, you'll have
-the modify the connector to accommodate the HP-style.
+to modify the connector to accommodate the HP-style.
 
-I picked up a Foxconn PV902512PSPF (0.40A) (HP part numbers: 435452-001,
-432768-001, 451144-001) from ebay that was originally used on a
-HP Compaq computer and it works great. A few other choices are Nidec
-T92T12MS3A7-57A03 (0.35A) fans from the Z8x0 series (HP part
-numbers: 647113-001, 749598-001, and 782506-001). Also common is the Delta
-AUB0912HH (0.40A). Beware: some of HP's newer case fans have ultra-short cables.
-I have not tested these other fans.
+I picked up a Foxconn PV902512PSPF from ebay that was originally used on a
+HP/Compaq computer and it works great. Here are some choices I saw:
+
+- Foxconn PV902512PSPF (0.40A) from HP/Compaq DCxx00 (HP: 435452-001, 432768-001, 451144-001)
+- Nidec T92T12MS3A7-57A03 (0.35A) from the Z8x0 series (HP: 647113-001, 749598-001, and 782506-001)
+- Foxconn PVA092G12H (0.40A) from the Z2x0 series (HP: 727135-001)
+- Delta AUB0912HH (0.40A) (HP: 411456-001)
+
+I have not tested the other fans. Beware: some of HP's newer case fans have ultra-short
+cables.
 
 ### One 92 mm Fan Guard
+
+<img align=right" width="200" height="200" src="../media/media/guard.jpg">
 
 This is essential - i.e., it's not just for your protection\! The fan guard
 bolts the baffle to the fan and keeps the structure square and strong. Setting
@@ -44,18 +51,23 @@ bulge a little. Silver wire with a bulge matched my CPU fan.
 
 ### Four Case Fan Screws
 
+<img align=right" width="100" height="100" src="../media/media/screws.jpg">
+
 These seem more or less standard - silver or black, about 10 mm in length, very
 coarse thread. Oh, skip the plastic push-pins or rubber connectors.
 
-### M6 x ~16 mm Bolt, M6 Nut, and Washer
+### M6 x ~16 mm Bolt, Nut, and Washers
+
+<img align=right" width="100" height="100" src="../media/media/bolt.jpg">
 
 You'll want to secure the fan mount to the bottom of the drive cage with an M6
 bolt of about 16 mm length. Too much longer and you'll run into other parts of
 the mount. You can get by with M5 or a \#12 size (1/4" hardware won't fit thru
-the hole). The head style does not matter too much.
+the hole). The head style does not matter, but, a little Threadlocker once
+you have everything set is a good idea. 
 
 You can print out the hardware pack provided. The washers are great, the nut is
-okay, but you'll eventually want a metal bolt.
+okay after a little work, but you'll eventually want a metal bolt.
 
 ## Printing
 
@@ -76,8 +88,8 @@ of 100%** if you choose to do this.
 
 1.  Set your computer it on its side and open up the side.
 
-2.  Check your fan electrically to ensure that it works by connecting it and
-    turning on/off the computer briefly.
+2.  Check your new fan electrically to ensure that it works by connecting it
+    and turning on/off the computer briefly.
 
 3.  Remove the bottom drive from the drive cage.
 
