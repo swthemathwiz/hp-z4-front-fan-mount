@@ -43,6 +43,16 @@ top_box_thickness = 1;
 //
 top_tang_multiplier = 0.97;
 
+// top_catch_rounded_hollow: rounded hollow cube
+module top_catch_rounded_hollow( size, radius, thickness ) {
+echo( size.z );
+  difference() {
+    rounded_side_cube_upper( size, top_catch_radius/3);
+    translate( [0,0,-SMIDGE] )
+      rounded_side_cube_upper( size - 2 * [top_box_thickness, top_box_thickness, -SMIDGE ], top_catch_radius/3 );
+  }
+} // end top_catch_rounded_hollow
+
 module top_catch_tang(style) {
   size = top_tang_multiplier * top_slot_size;
 
@@ -56,11 +66,7 @@ module top_catch_tang(style) {
   }
   // full: straight just scaled by percentage (for fitting)
   else if( style == "full" ) {
-    rounded_side_cube_upper( size, top_catch_radius/3);
-  }
-  // short: for testing
-  else if( style == "short" ) {
-    rounded_side_cube_upper( [size.x,size.y,size.z/3], top_catch_radius/3);
+    top_catch_rounded_hollow( size, top_catch_radius/3, top_box_thickness );
   }
   else {
     assert( false, "top_catch_tang: style unknown!" );
@@ -81,9 +87,18 @@ module top_catch_base( style, height ) {
   else if( style == "layout" ) {
     rounded_side_cube_upper( size, top_catch_radius );
 
-    catch_center_to_cage = 44+6;
-    translate( [-catch_center_to_cage/2,0,0] )
-      rounded_side_cube_upper( [catch_center_to_cage, 3, size.z], 0 );
+    // Side prong to cage
+    {
+      catch_center_to_cage = 44 + 5.7;
+      translate( [-catch_center_to_cage/2,0,0] )
+	rounded_side_cube_upper( [catch_center_to_cage, 3, size.z], 0 );
+    }
+    // Down prong to bottom level
+    {
+      catch_center_to_bottom = 135;
+      translate( [0,+catch_center_to_bottom/2,0] )
+        rounded_side_cube_upper( [3, catch_center_to_bottom, size.z+top_box_size.z], 0 );
+    }
   }
   else {
     assert( false, "top_catch_base: style unknown!" );
@@ -104,11 +119,7 @@ module top_catch_box(style) {
   }
   // full: just a box
   else if( style == "full" ) {
-    difference() {
-      rounded_side_cube_upper( size, top_catch_radius/3 );
-      translate( [0,0,-SMIDGE] )
-	rounded_side_cube_upper( size - 2 * [top_box_thickness, top_box_thickness, -SMIDGE ], top_catch_radius/3 );
-    }
+    top_catch_rounded_hollow( size, top_catch_radius/3, top_box_thickness );
   }
   else {
     assert( false, "top_catch_box: style unknown!" );
@@ -147,4 +158,4 @@ function top_catch_get_box_center()   = top_box_center;
 
 $fn = 32;
 //top_catch_fitting( height=3, base_style="full", tang_style="full");
-top_catch_fitting( height=3, base_style="layout", tang_style="short", box_style="full");
+top_catch_fitting( height=3, base_style="layout", tang_style="full", box_style="full");
