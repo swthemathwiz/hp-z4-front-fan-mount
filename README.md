@@ -18,7 +18,7 @@ TBD
 
 ### One 92 mm x 25 mm HP-Compatible Fan
 
-<img src="../media/media/fan.jpg" />
+<img src="../media/media/fan.jpg" width="200px" height="200px" />
 
 Generally, you'll want to buy or scavenge an HP-compatible PWM 12VDC fan that
 has the HP-specific 4-pin connector and a cable length of at least 6 inches.
