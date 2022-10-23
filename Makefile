@@ -89,16 +89,24 @@ $(DEPFILES):
 
 local-libraries:
 	@[ -d $(LIBRARIES)  ] || mkdir $(LIBRARIES)
+	# Install the repositories
 	@cd $(LIBRARIES) || exit 1 ; \
 	for repo in $(LIBRARY_REPOS); do \
 		dn=`echo "$$repo" | tr / ' ' | awk '{ print $$NF }'` ; \
 		echo "Getting github repository $$repo"; \
 		[ -d "$$dn" ] || git clone "$$repo" ; \
-	done ; \
+	done
+	# Install the files
+	@cd $(LIBRARIES) || exit 1 ; \
 	for filename in $(LIBRARY_FILES); do \
 		fn=`echo "$$filename" | tr / ' ' | awk '{ print $$NF }'` ; \
 		echo "Getting file $$fn"; \
 		[ -f "$$fn" ] || curl "$$filename" --output "$$fn" --silent ; \
+	done
+	# Make each repository directory with a Makefile
+	for repo in $(LIBRARY_REPOS); do \
+		dn=`echo "$$repo" | tr / ' ' | awk '{ print $$NF }'` ; \
+		[ -f "$(LIBRARIES)/$$dn/Makefile" ] && cd "$(LIBRARIES)/$$dn" && make; \
 	done
 
 include $(wildcard $(DEPFILES))
