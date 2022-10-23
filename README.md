@@ -54,7 +54,7 @@ bulge a little. Silver wire with a bulge matched my CPU fan.
 <img src="../media/media/screws.jpg" align="right" width="100px" height="100px" />
 
 These seem more or less standard - silver or black, about 10 mm in length, very
-coarse thread. Oh, skip the plastic push-pins or rubber connectors.
+coarse thread. Skip the plastic push-pins or rubber connectors.
 
 ### M6 x ~16 mm Bolt, Nut, and Washers
 
@@ -91,10 +91,10 @@ of 100%** if you choose to do this.
 2.  Check your new fan electrically to ensure that it works by connecting it
     and turning on/off the computer briefly.
 
-3.  Remove the bottom drive from the drive cage.
+3.  Remove the bottom drive from the drive cage. You'll need the space.
 
-4.  While you're in there do a visual inspection of the lower front of the
-    computer where the mount will be installed:
+4.  Now seems like a good time to do a little visual inspection. First, the lower front of the
+    computer where the mount will go. See:
     
     - two slots and the tab on the far side (now bottom) of the case
     - a screw hole about an inch and a half from the bottom/side (now
@@ -102,38 +102,40 @@ of 100%** if you choose to do this.
     - two slots at the side (now top) of front of the case (just below the
       outside).
 
-5.  Do a visual inspection of the corresponding parts of the mount:
+    Next look at the corresponding parts of the printed mount:
     
     - two short tangs on the bottom of the mount and a narrow slot between them
       that fits the case's tab
     - the hole on the cage-side arm on the top of the mount
     - two large sway-back tabs on the top of mount
 
-6.  Now's a good time to verify that your bolt fits thru the hole in the cage
+    It's also a good time to verify that your bolt fits thru the hole in the cage
     arm on the mount and in the hole in drive cage bottom.
 
-7.  Move/rearrange any cable flow in the case now to get some access. Consider
+5.  Rearrange any cable flow in the case now to improve access. Consider
     anything from the bottom slots/tab to the front of the case off-limits. The
     fan does not obstruct drive cables, but it's going to be a pain to change
     these after the fan is installed.
 
-8.  Join the fan to the baffle. Orient the fan so that the air blows thru the
+6.  Join the fan to the baffle. Orient the fan so that the air blows thru the
     baffle (bottom of print) - generally that's fan label toward the front of
     the baffle - and so that the fan cable is near the bottom corner (farthest
     from the cage arm). Then its fan guard in front of baffle, and screw the
     four case screws thru the guard and baffle into the case. You can make that
     quite tight.
 
-9.  Install the mount in the computer. The easiest sequence seems to be tilt the
+    <img src="../media/media/assembled.jpg" align="center" width="200px" height="200px" />
+
+7.  Install the mount in the computer. The easiest sequence seems to be tilt the
     mount slightly forward, line up the bottom tab/tangs, push the top tabs down
     a little and let the whole thing slide down. Release the tabs into the top
     slots. Verify a reasonably tight fit.
 
-10. Push the bolt with a washer thru the drive side and thru the cage arm, and
+8.  Push the bolt with a washer thru the drive side and thru the cage arm, and
     then apply the nut - finger tight. It's a little bit of a dexterity
     challenge.
 
-11. Plug in the fan, reattach any hardware, power on and enjoy the cool breeze
+9.  Plug in the fan, reattach any hardware, power on and enjoy the cool breeze
     of a front case fan on your HP Z4\!
 
 ## Source
