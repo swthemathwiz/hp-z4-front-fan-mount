@@ -124,7 +124,7 @@ module fastener_hex_bolt( s, length, shank=0 ) {
   thread_spec        = fastener_get_attribute( spec, "thread_spec" );
   thread_diameter    = fastener_get_attribute( spec, "thread_diameter" );
 
-  linear_extrude( head_thickness ) hexagon( fastener_hex_across_flats_to_radius( head_across_flats ) );
+  linear_extrude( head_thickness ) regular_polygon( 6, fastener_hex_across_flats_to_radius( head_across_flats ) );
 
   if( shank > 0 )
     translate( [ 0, 0, head_thickness ] )
@@ -154,7 +154,7 @@ module fastener_hex_nut( s ) {
   // Head
   linear_extrude( nut_thickness )
     difference() {
-      hexagon( fastener_hex_across_flats_to_radius( head_across_flats ) );
+      regular_polygon( 6, fastener_hex_across_flats_to_radius( head_across_flats ) );
       circle( d=head_across_flats-.1 );
     }
 } // end fastener_hex_nut
