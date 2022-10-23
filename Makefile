@@ -34,6 +34,16 @@ EXTRAS = \
 	README.md \
 	LICENSE.txt \
 
+LIBRARIES = ./libraries
+
+LIBRARY_REPOS = \
+	https://github.com/openscad/scad-utils \
+	https://github.com/openscad/list-comprehension-demos \
+	https://github.com/adrianschlatter/threadlib
+
+LIBRARY_FILES = \
+	https://github.com/MisterHW/IoP-satellite/raw/master/OpenSCAD%20bottle%20threads/thread_profile.scad
+
 TARGETS = $(BUILDS:.scad=.stl)
 IMAGES = $(BUILDS:.scad=.png)
 ICONS = $(BUILDS:.scad=.icon.png)
@@ -76,5 +86,19 @@ $(DEPDIR): ; @mkdir -p $@
 
 DEPFILES := $(TARGETS:%.stl=$(DEPDIR)/%.d)
 $(DEPFILES):
+
+local-libraries:
+	@[ -d $(LIBRARIES)  ] || mkdir $(LIBRARIES)
+	@cd $(LIBRARIES) || exit 1 ; \
+	for repo in $(LIBRARY_REPOS); do \
+		dn=`echo "$$repo" | tr / ' ' | awk '{ print $$NF }'` ; \
+		echo "Getting github repository $$repo"; \
+		[ -d "$$dn" ] || git clone "$$repo" ; \
+	done ; \
+	for filename in $(LIBRARY_FILES); do \
+		fn=`echo "$$filename" | tr / ' ' | awk '{ print $$NF }'` ; \
+		echo "Getting file $$fn"; \
+		[ -f "$$fn" ] || curl "$$filename" --output "$$fn" --silent ; \
+	done
 
 include $(wildcard $(DEPFILES))
