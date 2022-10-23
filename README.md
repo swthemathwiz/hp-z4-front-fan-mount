@@ -129,7 +129,7 @@ of 100%** if you choose to do this.
     four case screws thru the guard and baffle into the case. You can make that
     quite tight.
 
-    <p align="center"><img src="../media/media/assembled.jpg" width="300px" height="300px" /></p>
+    <p align="center"><img src="../media/media/assembled.jpg" height="300px" /></p>
 
 7.  Install the mount in the computer. The easiest sequence seems to be tilt the
     mount slightly forward, line up the bottom tab/tangs, push the top tabs down
