@@ -82,18 +82,13 @@ clean:
 distclean: clean
 	rm -rf $(DEPDIR)
 
-$(DEPDIR): ; @mkdir -p $@
-
-DEPFILES := $(TARGETS:%.stl=$(DEPDIR)/%.d)
-$(DEPFILES):
-
 local-libraries:
 	@[ -d $(LIBRARIES)  ] || mkdir $(LIBRARIES)
 	# Install the repositories
 	@cd $(LIBRARIES) || exit 1 ; \
 	for repo in $(LIBRARY_REPOS); do \
 		dn=`echo "$$repo" | tr / ' ' | awk '{ print $$NF }'` ; \
-		echo "Getting github repository $$repo"; \
+		echo "Getting repository $$repo"; \
 		[ -d "$$dn" ] || git clone "$$repo" ; \
 	done
 	# Install the files
@@ -104,9 +99,17 @@ local-libraries:
 		[ -f "$$fn" ] || curl "$$filename" --output "$$fn" --silent ; \
 	done
 	# Make each repository directory with a Makefile
-	for repo in $(LIBRARY_REPOS); do \
+	@for repo in $(LIBRARY_REPOS); do \
 		dn=`echo "$$repo" | tr / ' ' | awk '{ print $$NF }'` ; \
-		[ -f "$(LIBRARIES)/$$dn/Makefile" ] && cd "$(LIBRARIES)/$$dn" && $(MAKE); \
+		if [ -f "$(LIBRARIES)/$$dn/Makefile" ]; then \
+			echo "Making repository $$dn"; \
+			cd "$(LIBRARIES)/$$dn" && $(MAKE); \
+		fi ; \
 	done
+
+$(DEPDIR): ; @mkdir -p $@
+
+DEPFILES := $(TARGETS:%.stl=$(DEPDIR)/%.d)
+$(DEPFILES):
 
 include $(wildcard $(DEPFILES))
