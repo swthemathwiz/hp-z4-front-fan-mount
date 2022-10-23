@@ -42,7 +42,7 @@ LIBRARY_REPOS = \
 	https://github.com/adrianschlatter/threadlib
 
 LIBRARY_FILES = \
-	https://github.com/MisterHW/IoP-satellite/raw/master/OpenSCAD%20bottle%20threads/thread_profile.scad
+	https://raw.githubusercontent.com/MisterHW/IoP-satellite/master/OpenSCAD%20bottle%20threads/thread_profile.scad
 
 TARGETS = $(BUILDS:.scad=.stl)
 IMAGES = $(BUILDS:.scad=.png)
