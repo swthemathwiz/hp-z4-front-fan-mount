@@ -11,6 +11,8 @@ jobs:
     steps:
     - name: Build
       uses: swthemathwiz/openscad-actions/build@v1
+      with:
+        local_libraries: true
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
