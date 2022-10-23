@@ -115,7 +115,7 @@ of 100%** if you choose to do this.
     It's also a good time to verify that your bolt fits thru the hole in the cage
     arm on the mount and in the hole in drive cage bottom.
 
-    <p align="center"><img src="../media/media/inspection.jpg" height="300px" /></p>
+    <p align="center"><img src="../media/media/inspection.jpg" height="350px" /></p>
 
 5.  Rearrange any cable flow in the case now to improve access. Consider
     anything from the bottom slots/tab to the front of the case off-limits. The
