@@ -8,11 +8,13 @@ creator is not responsible for any damage resulting from its use.
 
 ## Models
 
-TBD
+<div class="model" data-name="HP Z4 G4 Front Fan Mount" data-left-icon="hp-z4-front-fan-mount.icon.png" data-left="hp-z4-front-fan-mount.stl">
+The fan mount itself.
+</div>
 
-[![View Fan Mount Model](../media/media/hp-z4-front-fan-mount.icon.png)](../media/media/hp-z4-front-fan-mount.stl "View Model of Fan Mount")
-
-[![View Hardware Model](../media/media/hp-z4-front-fan-hardware.icon.png)](../media/media/hp-z4-front-fan-hardware.stl "View Model of Hardware")
+<div class="model" data-name="Hardware Pack" data-left-icon="hp-z4-front-fan-hardware.icon.png" data-left="hp-z4-front-fan-hardware.stl">
+An optional set of mounting hardware (promarily for testing).
+</div>
 
 ## What You'll Need
 
@@ -89,28 +91,31 @@ of 100%** if you choose to do this.
 1.  Set your computer it on its side and open up the side.
 
 2.  Check your new fan electrically to ensure that it works by connecting it
-    and turning on/off the computer briefly.
+    and turning on/off the computer briefly. The connector goes to the
+    white 4-pin connector at the very front-bottom of the mainboard.
 
 3.  Remove the bottom drive from the drive cage. You'll need the space.
 
 4.  Now seems like a good time to do a little visual inspection. First, the lower front of the
     computer where the mount will go. See:
     
-    - two slots and the tab on the far side (now bottom) of the case
+    - two slots in the side (now top) of front of the case (just below the
+      outside).
     - a screw hole about an inch and a half from the bottom/side (now
       bottom/top) of the drive cage
-    - two slots at the side (now top) of front of the case (just below the
-      outside).
+    - two slots and the tab on the far side (now bottom) of the case
 
     Next look at the corresponding parts of the printed mount:
     
+    - a large sway-back arm with two tangs at the top of mount
+    - a hole on the cage arm that's on the top side of the baffle
     - two short tangs on the bottom of the mount and a narrow slot between them
       that fits the case's tab
-    - the hole on the cage-side arm on the top of the mount
-    - two large sway-back tabs on the top of mount
 
     It's also a good time to verify that your bolt fits thru the hole in the cage
     arm on the mount and in the hole in drive cage bottom.
+
+    <p align="center"><img src="../media/media/inspection.jpg" width="300px" height="300px" /></p>
 
 5.  Rearrange any cable flow in the case now to improve access. Consider
     anything from the bottom slots/tab to the front of the case off-limits. The
@@ -124,7 +129,7 @@ of 100%** if you choose to do this.
     four case screws thru the guard and baffle into the case. You can make that
     quite tight.
 
-    <p align="center"><img src="../media/media/assembled.jpg" width="200px" height="200px" /></p>
+    <p align="center"><img src="../media/media/assembled.jpg" width="300px" height="300px" /></p>
 
 7.  Install the mount in the computer. The easiest sequence seems to be tilt the
     mount slightly forward, line up the bottom tab/tangs, push the top tabs down
