@@ -106,7 +106,7 @@ local-libraries:
 	# Make each repository directory with a Makefile
 	for repo in $(LIBRARY_REPOS); do \
 		dn=`echo "$$repo" | tr / ' ' | awk '{ print $$NF }'` ; \
-		[ -f "$(LIBRARIES)/$$dn/Makefile" ] && cd "$(LIBRARIES)/$$dn" && make; \
+		[ -f "$(LIBRARIES)/$$dn/Makefile" ] && cd "$(LIBRARIES)/$$dn" && $(MAKE); \
 	done
 
 include $(wildcard $(DEPFILES))
