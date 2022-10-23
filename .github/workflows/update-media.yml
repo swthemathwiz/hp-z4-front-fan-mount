@@ -49,7 +49,7 @@ jobs:
         fi
         echo "Target: ${target[@]}"
         #echo "::set-output name=string::$(echo ${target[@]})"
-        echo "{TARGETS}=$(echo ${target[@]})" >> $GITHUB_OUTPUT
+        echo "TARGETS=$(echo ${target[@]})" >> $GITHUB_OUTPUT
     - name: Build Media Artifacts
       uses: swthemathwiz/openscad-actions/build@v1
       with:
