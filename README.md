@@ -8,17 +8,17 @@ creator is not responsible for any damage resulting from its use.
 
 ## Models
 
-<div class="model" data-name="HP Z4 G4 Front Fan Mount" data-left-icon="hp-z4-front-fan-mount.icon.png" data-left="hp-z4-front-fan-mount.stl" data-right="installed.jpg">
+<div class="model" data-name="HP Z4 G4 Front Fan Mount" data-left-icon="hp-z4-front-fan-mount.icon.png" data-left="hp-z4-front-fan-mount.stl" data-right="installed.jpg"><!-- expanded by annotate-model --><table align="center" width="100%"><tbody><tr width="100%"><td align="center" width="128" height="128"><a href="../media/media/hp-z4-front-fan-mount.stl" target="_blank" title="View HP Z4 G4 Front Fan Mount Model"><img src="../media/media/hp-z4-front-fan-mount.icon.png" alt="HP Z4 G4 Front Fan Mount Model" width="96" height="96" /></a></td><td>
 
 The fan mount itself.
 
-</div>
+</td><td align="center" width="128" height="128"><a href="../media/media/installed.jpg" target="_blank" title="View HP Z4 G4 Front Fan Mount Installed"><img src="../media/media/installed.jpg" alt="HP Z4 G4 Front Fan Mount Installed" width="96" height="96" /></a></td></tr></tbody></table></div>
 
-<div class="model" data-name="Hardware Pack" data-left-icon="hp-z4-front-fan-hardware.icon.png" data-left="hp-z4-front-fan-hardware.stl">
+<div class="model" data-name="Hardware Pack" data-left-icon="hp-z4-front-fan-hardware.icon.png" data-left="hp-z4-front-fan-hardware.stl"><!-- expanded by annotate-model --><table align="center" width="100%"><tbody><tr width="100%"><td align="center" width="128" height="128"><a href="../media/media/hp-z4-front-fan-hardware.stl" target="_blank" title="View Hardware Pack Model"><img src="../media/media/hp-z4-front-fan-hardware.icon.png" alt="Hardware Pack Model" width="96" height="96" /></a></td><td>
 
 An optional set of mounting hardware (primarily for testing).
 
-</div>
+</td></tr></tbody></table></div>
 
 ## What You'll Need
 
