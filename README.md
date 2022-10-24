@@ -32,7 +32,7 @@ connects the fan mount to the bottom of the drive cage.
 
 ### One 92 mm x 25 mm HP-Compatible Fan
 
-<img src="../media/media/fan.jpg" align="right" width="200px" height="200px" />
+<img src="../media/media/fan.jpg" align="right" width="250px" height="250px" />
 
 Generally, you'll want to buy or scavenge an HP-compatible PWM 12VDC fan that
 has the HP-specific 4-pin connector and a cable length of at least 6 inches.
