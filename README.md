@@ -8,12 +8,16 @@ creator is not responsible for any damage resulting from its use.
 
 ## Models
 
-<div class="model" data-name="HP Z4 G4 Front Fan Mount" data-left-icon="hp-z4-front-fan-mount.icon.png" data-left="hp-z4-front-fan-mount.stl">
+<div class="model" data-name="HP Z4 G4 Front Fan Mount" data-left-icon="hp-z4-front-fan-mount.icon.png" data-left="hp-z4-front-fan-mount.stl" data-right="installed.jpg">
+
 The fan mount itself.
+
 </div>
 
 <div class="model" data-name="Hardware Pack" data-left-icon="hp-z4-front-fan-hardware.icon.png" data-left="hp-z4-front-fan-hardware.stl">
-An optional set of mounting hardware (promarily for testing).
+
+An optional set of mounting hardware (primarily for testing).
+
 </div>
 
 ## What You'll Need
@@ -53,14 +57,14 @@ bulge a little. Silver wire with a bulge matched my CPU fan.
 
 ### Four Case Fan Screws
 
-<img src="../media/media/screws.jpg" align="right" width="100px" height="100px" />
+<img src="../media/media/screws.jpg" align="right" width="75px" height="75px" />
 
 These seem more or less standard - silver or black, about 10 mm in length, very
 coarse thread. Skip the plastic push-pins or rubber connectors.
 
 ### M6 x ~16 mm Bolt, Nut, and Washers
 
-<img src="../media/media/bolt.jpg" align="right" width="100px" height="100px" />
+<img src="../media/media/bolt.jpg" align="right" width="75px" height="75px" />
 
 You'll want to secure the fan mount to the bottom of the drive cage with an M6
 bolt of about 16 mm length. Too much longer and you'll run into other parts of
