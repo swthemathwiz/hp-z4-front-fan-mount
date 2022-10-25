@@ -94,9 +94,12 @@ local-libraries:
 	# Install the files
 	@cd $(LIBRARIES) || exit 1 ; \
 	for filename in $(LIBRARY_FILES); do \
-		fn=`echo "$$filename" | tr / ' ' | awk '{ print $$NF }'` ; \
-		echo "Getting file $$fn"; \
-		[ -f "$$fn" ] || curl "$$filename" --output "$$fn" --silent ; \
+		readarray -td, fnarr < <(printf '%s' "$$filename"); \
+		url="$${fnarr[0]}" ; \
+		fn="$${fnarr[1]}" ; \
+		[ "$$fn" != "" ] || fn=`echo "$$url" | tr / ' ' | awk '{ print $$NF }'` ; \
+		echo "Getting file $$fn from $$url"; \
+		[ -f "$$fn" ] || curl "$$url" --output "$$fn" --silent ; \
 	done
 	# Make each repository directory with a Makefile
 	@for repo in $(LIBRARY_REPOS); do \
