@@ -6,7 +6,7 @@ This is a 3D-Printable [OpenSCAD](https://openscad.org/) model of a front fan
 mount for an HP Z4 G4 workstation. This is in no way endorsed by HP.
 Also, the author is not responsible for any damage resulting from its use.
 
-<p align="center"><img src="../media/media/hp-z4-front-fan-mount.installed.jpg" alt="HP Z4 G4 with Front Fan Mount"  height="300px" /></p>
+<p align="center"><img src="../media/media/hp-z4-front-fan-mount.installed.jpg" alt="HP Z4 G4 with Front Fan Mount"  height="350px" /></p>
 
 ## Models
 
@@ -51,16 +51,18 @@ I picked up a Foxconn PV902512PSPF from ebay that was originally used on a
 HP/Compaq computer and it works great. Here are some choices I saw:
 
 - Foxconn PV902512PSPF (0.40A) from HP/Compaq DCxx00 (HP: 435452-001, 432768-001, 451144-001)
-- Nidec T92T12MS3A7-57A03 (0.35A) from the Z8x0 series (HP: 647113-001, 749598-001, and 782506-001)
+- Nidec T92T12MS3A7-57A03 (0.35A) from the Zxx0 series (HP: 647113-001 Rev. B, 749598-001, and 782506-001)
+- Delta QUR0912VH (0.60A) from the Z4x0 series (HP: 647113-001 Rev. A)
 - Foxconn PVA092G12H (0.40A) from the Z2x0 series (HP: 727135-001)
 - Delta AUB0912HH (0.40A) (HP: 411456-001)
 
-I have not tested the other fans. Beware: some of HP's newer case fans have ultra-short
-cables.
+I have not tested the other fans. Given that both 0.60A and 0.35A fans were used
+as front fans in the Z440 series, I think any of these will do the job. Beware: some
+of HP's case fans - especially the newer ones - have ultra-short cables.
 
 ### One 92 mm Fan Guard
 
-<img src="../media/media/guard.jpg" alt="Fan Guard" align="right" width="200px" height="200px" />
+<img src="../media/media/guard.jpg" alt="Fan Guard" align="right" width="180px" height="180px" />
 
 This is essential - i.e., it's not just for your protection\! The fan guard
 bolts the baffle to the fan and keeps the structure square and strong. Setting
@@ -69,7 +71,7 @@ bulge a little. Silver wire with a bulge matched my CPU fan.
 
 ### Four Case Fan Screws
 
-<img src="../media/media/screws.jpg" alt="Case Fan Screws" align="right" width="75px" height="75px" />
+<img src="../media/media/screws.jpg" alt="Case Fan Screws" align="right" width="60px" height="60px" />
 
 These seem more or less standard - silver or black, about 10 mm in length, very
 coarse thread. Skip the plastic push-pins or rubber connectors.
