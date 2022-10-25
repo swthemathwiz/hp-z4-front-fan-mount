@@ -3,8 +3,10 @@
 ## Introduction
 
 This is a 3D-Printable [OpenSCAD](https://openscad.org/) model of a front fan
-mount for an HP Z4 G4 workstation. This is in no way endorsed by HP. The
-creator is not responsible for any damage resulting from its use.
+mount for an HP Z4 G4 workstation. This is in no way endorsed by HP.
+Also, the author is not responsible for any damage resulting from its use.
+
+<p align="center"><img src="../media/media/hp-z4-front-fan-mount.installed.jpg" alt="HP Z4 G4 with Front Fan Mount"  height="300px" /></p>
 
 ## Models
 
@@ -32,7 +34,7 @@ connects the fan mount to the bottom of the drive cage.
 
 ### One 92 mm x 25 mm HP-Compatible Fan
 
-<img src="../media/media/fan.jpg" align="right" width="250px" height="250px" />
+<img src="../media/media/fan.jpg" alt="Fan" align="right" width="250px" height="250px" />
 
 Generally, you'll want to buy or scavenge an HP-compatible PWM 12VDC fan that
 has the HP-specific 4-pin connector and a cable length of at least 6 inches.
@@ -56,7 +58,7 @@ cables.
 
 ### One 92 mm Fan Guard
 
-<img src="../media/media/guard.jpg" align="right" width="200px" height="200px" />
+<img src="../media/media/guard.jpg" alt="Fan Guard" align="right" width="200px" height="200px" />
 
 This is essential - i.e., it's not just for your protection\! The fan guard
 bolts the baffle to the fan and keeps the structure square and strong. Setting
@@ -65,14 +67,14 @@ bulge a little. Silver wire with a bulge matched my CPU fan.
 
 ### Four Case Fan Screws
 
-<img src="../media/media/screws.jpg" align="right" width="75px" height="75px" />
+<img src="../media/media/screws.jpg" alt="Case Fan Screws" align="right" width="75px" height="75px" />
 
 These seem more or less standard - silver or black, about 10 mm in length, very
 coarse thread. Skip the plastic push-pins or rubber connectors.
 
 ### M6 x ~16 mm Bolt, Nut, and Washers
 
-<img src="../media/media/bolt.jpg" align="right" width="75px" height="75px" />
+<img src="../media/media/bolt.jpg" alt="Nuts and Bolts" align="right" width="75px" height="75px" />
 
 You'll want to secure the fan mount to the bottom of the drive cage with an M6
 bolt of about 16 mm length. Too much longer and you'll run into other parts of
@@ -127,7 +129,7 @@ of 100%** if you choose to do this.
     It's also a good time to verify that your bolt fits thru the hole in the cage
     arm on the mount and in the hole in drive cage bottom.
 
-    <p align="center"><img src="../media/media/inspection.jpg" height="350px" /></p>
+    <p align="center"><img src="../media/media/inspection.jpg" alt="Case and Mount Connections" height="350px" /></p>
 
 5.  Rearrange any cable flow in the case now to improve access. Consider
     anything from the bottom slots/tab to the front of the case off-limits. The
@@ -141,7 +143,7 @@ of 100%** if you choose to do this.
     four case screws thru the guard and baffle into the case. You can make that
     quite tight.
 
-    <p align="center"><img src="../media/media/assembled.jpg" height="300px" /></p>
+    <p align="center"><img src="../media/media/assembled.jpg" alt="Fan with Mount Assembled"  height="300px" /></p>
 
 7.  Install the mount in the computer. The easiest sequence seems to be tilt the
     mount slightly forward, line up the bottom tab/tangs, push the top tabs down
