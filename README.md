@@ -27,8 +27,8 @@ M.2 drives, etc.).
 
 ### Hardware Pack
 
-An optional set of mounting hardware (primarily for testing) that
-connects the fan mount to the bottom of the drive cage.
+An optional set of mounting hardware (see below) that
+attaches the fan mount to the bottom of the drive cage.
 
 </td></tr></tbody></table></div>
 
@@ -38,7 +38,7 @@ connects the fan mount to the bottom of the drive cage.
 
 <img src="../media/media/fan.jpg" alt="Fan" align="right" width="250px" height="250px" />
 
-Generally, you'll want to buy or scavenge an HP-compatible PWM 12VDC fan that
+Generally, you'll want to buy (or scavenge) an HP-compatible PWM 12VDC fan that
 has the HP-specific 4-pin connector and a cable length of at least 6 inches.
 
 The HP fan connector is somewhat proprietary. Older fans tend to have
@@ -56,8 +56,8 @@ HP/Compaq computer and it works great. Here are some choices I saw:
 - Foxconn PVA092G12H (0.40A) from the Z2x0 series (HP: 727135-001)
 - Delta AUB0912HH (0.40A) (HP: 411456-001)
 
-I have not tested the other fans. Given that both 0.60A and 0.35A fans were used
-as front fans in the Z440 series, I think any of these will do the job. Beware: some
+I have not tested the other fans. Given that both 0.60A and 0.35A fans are used
+as front fans in the Z440, I think any of these will do the job. Beware: some
 of HP's case fans - especially the newer ones - have ultra-short cables.
 
 ### One 92 mm Fan Guard
@@ -114,8 +114,8 @@ of 100%** if you choose to do this.
 
 3.  Remove the bottom drive from the drive cage. You'll need the space.
 
-4.  Now seems like a good time to do a little visual inspection. First, the lower front of the
-    computer where the mount will go. See:
+4.  Now seems like a good time to do a little visual inspection. First, look at the
+    lower front of the computer where the mount will go. See:
     
     - two slots in the side (now top) of front of the case (just below the
       outside).
