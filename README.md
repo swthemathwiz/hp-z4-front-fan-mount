@@ -10,7 +10,9 @@ Also, the author is not responsible for any damage resulting from its use.
 
 ## Models
 
-<div class="model" data-name="HP Z4 G4 Front Fan Mount" data-icon-size="128" data-left-icon="hp-z4-front-fan-mount.icon.png" data-left="hp-z4-front-fan-mount.stl" data-right="hp-z4-front-fan-mount.installed.jpg"><!-- expanded by annotate-model --><table align="center" width="100%"><tbody><tr width="100%"><td align="center" width="160" height="160"><a href="../media/media/hp-z4-front-fan-mount.stl" target="_blank" title="View HP Z4 G4 Front Fan Mount Model"><img src="../media/media/hp-z4-front-fan-mount.icon.png" alt="HP Z4 G4 Front Fan Mount Model" width="128" height="128" /></a></td><td>
+There are two models included:
+
+<div class="model" data-name="HP Z4 G4 Front Fan Mount" data-icon-size="128" data-left-icon="hp-z4-front-fan-mount.icon.png" data-left="hp-z4-front-fan-mount.stl"><!-- expanded by annotate-model --><table align="center" width="100%"><tbody><tr width="100%"><td align="center" width="160" height="160"><a href="../media/media/hp-z4-front-fan-mount.stl" target="_blank" title="View HP Z4 G4 Front Fan Mount Model"><img src="../media/media/hp-z4-front-fan-mount.icon.png" alt="HP Z4 G4 Front Fan Mount Model" width="128" height="128" /></a></td><td>
 
 ### HP Z4 G4 Front Fan Mount
 
