@@ -231,26 +231,11 @@ module arm_to_circle( p1, p2, c, radius, with_circle=true ) {
     translate( [c.x, c.y] ) circle( r=radius );
 } // end arm_to_circle
 
-$fn = 80;
-
-//arm( [ 40, 20, 1 ], 6, 3 );
-//resize( [0,0,10] ) arm_mixed( [ 40, 50, 1 ], 6, 3, 30 );
-
-//arm_to_circle( [0, 0], [-20, 15], [ +20, +30 ], 4, with_circle=true );
-//arm_to_circle( [50, 0], [-20, 15], [ +20, +30 ], 8 );
-
-//arm_tapered( [30,40], [30,5], [5,2], [75,45,100], curvature=arm_default_curvature, balance=25 );
-//
-      //tip_profile  = [ slot_size.x,slot_size.y ] - [ 6, 3 ];
-//      tip_profile  = [ slot_size.x,slot_size.y ] - [ 2, 2 ];
-//      base_profile = [ tab_base_width, baffle_side_height_min ];
-//      size         = [ catch_center.z - baffle_attach_top.z, catch_center.y - baffle_attach_top.y + tip_profile.y/2 ];
-//      tang_profile = [ 80, 30, 100 ]
-//arm_tapered( [39.7, 29.6], [32, 5], [9, 4], straight_percentage=0, curvature=arm_default_curvature, balance=35 );
-//   tang_profile - tang dimensions   - x = percentage tip thickness, y = angle, z = pivot point
-// [11,6,11]
-//intersection() {
-//  translate( [ 10, -80, 10 ] ) cube( 100 );
-  rotate( [0,-90,180] ) arm_tapered( [39.7, 29.6], [32, 5], [8, 3], [66,35,70], straight_percentage=0, curvature=arm_default_curvature, balance=35 );
-//}
-//rotate( [0,-90,180] ) translate( [ 0, +20, 0 ] ) arm_tapered( [39.7, 29.6], [32, 5], [8, 3], straight_percentage=0, curvature=arm_default_curvature, balance=35 );
+if( false ) {
+  $fn = 80;
+  //arm( [ 40, 20, 1 ], 6, 3 );
+  //arm_mixed( [ 40, 50, 1 ], 6, 3, 30 );
+  //arm_to_circle( [0, 0], [-20, 15], [ +20, +30 ], 4, with_circle=true );
+  //arm_to_circle( [50, 0], [-20, 15], [ +20, +30 ], 8 );
+  arm_tapered( [30,40], [30,5], [5,2], [75,45,100], curvature=arm_default_curvature, balance=25 );
+}
