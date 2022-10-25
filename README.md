@@ -21,7 +21,7 @@ cage in the front bottom part of an HP Z4 G4 workstation and is required
 by the BIOS when certain devices are present (e.g. power graphics cards,
 M.2 drives, etc.).
 
-</td><td align="center" width="160" height="160"><a href="../media/media/hp-z4-front-fan-mount.installed.jpg" target="_blank" title="View HP Z4 G4 Front Fan Mount Installed"><img src="../media/media/hp-z4-front-fan-mount.installed.jpg" alt="HP Z4 G4 Front Fan Mount Installed" width="128" height="128" /></a></td></tr></tbody></table></div>
+</td></tr></tbody></table></div>
 
 <div class="model" data-name="Hardware Pack" data-icon-size="128" data-left-icon="hp-z4-front-fan-hardware.icon.png" data-left="hp-z4-front-fan-hardware.stl"><!-- expanded by annotate-model --><table align="center" width="100%"><tbody><tr width="100%"><td align="center" width="160" height="160"><a href="../media/media/hp-z4-front-fan-hardware.stl" target="_blank" title="View Hardware Pack Model"><img src="../media/media/hp-z4-front-fan-hardware.icon.png" alt="Hardware Pack Model" width="128" height="128" /></a></td><td>
 
