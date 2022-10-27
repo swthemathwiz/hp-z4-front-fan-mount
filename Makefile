@@ -82,6 +82,7 @@ clean:
 distclean: clean
 	rm -rf $(DEPDIR)
 
+local-libraries: SHELL := /usr/bin/bash
 local-libraries:
 	@[ -d $(LIBRARIES)  ] || mkdir $(LIBRARIES)
 	# Install the repositories
@@ -99,7 +100,7 @@ local-libraries:
 		fn="$${fnarr[1]}" ; \
 		[ "$$fn" != "" ] || fn=`echo "$$url" | tr / ' ' | awk '{ print $$NF }'` ; \
 		echo "Getting file $$fn from $$url"; \
-		[ -f "$$fn" ] || curl "$$url" --output "$$fn" --silent ; \
+		[ -f "$$fn" ] || curl "$$url" --output "$$fn" --location --silent ; \
 	done
 	# Make each repository directory with a Makefile
 	@for repo in $(LIBRARY_REPOS); do \
