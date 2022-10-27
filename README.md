@@ -164,7 +164,7 @@ of 100%** if you choose to do this.
 ## Source
 
 The fan mount is built using OpenSCAD. *hp-z4-front-fan-mount.scad* is the main
-file for the adapter. *hp-z4-front-fan-hardware.scad* builds the hardware
+file for the model. *hp-z4-front-fan-hardware.scad* builds the hardware
 package.
 
 ### Libraries
@@ -192,14 +192,19 @@ folder should now include the following files and directories:
     └── thread_profile.scad
 ```
 
+Alternately, if you're building on Linux, `make local-libraries` should fetch all the files
+and place them in the local directory "./libraries". Then, you can set the environment variable
+[OPENSCADPATH](https://wikibooks.org/wiki/OpenSCAD_User_Manual/Libraries#Setting_OPENSCADPATH)
+to include that directory in OpenSCAD's library search path.
+
 ### Fan Models
 
 Models are used to visualize and verify the relative positions of holes and
-mounts during debugging and not necessary for building.
-
-This projects uses a 92 mm fan model that was created from [Delta](https://www.delta-fan.com) fan
-models by conversion from the STEP files they provide and converted to stl by 
-[IMAGEtoSTL](https://imagetostl.com/convert/file/stp/to/stl). The models are:
+mounts during debugging and not necessary for building. This project uses a
+92 mm fan model that was created from a [Delta](https://www.delta-fan.com)
+fan model that was converted from STEP to stl format using
+[IMAGEtoSTL](https://imagetostl.com/convert/file/stp/to/stl). The fan models
+referenced in the source are:
 
 - 92 mm x 25 mm Fan: file _Delta-AFB0912HH.STL_ from [Delta AFB0912HH](https://www.delta-fan.com/AFB0912HH.html)
 - 80 mm x 25 mm Fan: file _Delta-AFB0812HH.STL_ from [Delta AFB0812HH](https://www.delta-fan.com/AFB0812HH.html)
