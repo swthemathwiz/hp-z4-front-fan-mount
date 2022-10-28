@@ -159,7 +159,10 @@ of 100%** if you choose to do this.
     challenge.
 
 9.  Plug in the fan, reattach any hardware, power on and enjoy the cool breeze
-    of a front case fan on your HP Z4\!
+    of a front case fan on your HP Z4\! Actually, it really is rather
+    tepid, so if you want to test higher speeds, reboot into the BIOS
+    Setup → Advanced → Built-In Device Options → Increase Idle Fan
+    Speed(%) → 90 to create a small hurricane.
 
 ## Source
 
