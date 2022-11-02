@@ -8,7 +8,7 @@ Also, the author is not responsible for any damage resulting from its use.
 
 <p align="center"><img src="../media/media/hp-z4-front-fan-mount.installed.jpg" alt="HP Z4 G4 with Front Fan Mount"  height="350px" /></p>
 
-## Models
+## Model and Parts
 
 There are two models included:
 
@@ -106,10 +106,10 @@ of 100%** if you choose to do this.
 
 ## Installation
 
-1.  Set your computer it on its side and open up the side.
+1.  Set your computer on its side and open up the side.
 
 2.  Check your new fan electrically to ensure that it works by connecting it
-    and turning on/off the computer briefly. The connector goes to the
+    and turning the computer on/off briefly. The connector goes to the
     white 4-pin connector at the very front-bottom of the mainboard.
 
 3.  Remove the bottom drive from the drive cage. You'll need the space.
@@ -118,17 +118,17 @@ of 100%** if you choose to do this.
     lower front of the computer where the mount will go. See:
     
     - two slots in the side (now top) of front of the case (just below the
-      outside).
+      outside),
     - a screw hole about an inch and a half from the bottom/side (now
-      bottom/top) of the drive cage
-    - two slots and the tab on the far side (now bottom) of the case
+      bottom/top) of the drive cage, and,
+    - two slots and the tab on the far side (now bottom) of the case.
 
     Next look at the corresponding parts of the printed mount:
     
-    - a large sway-back arm with two tangs at the top of mount
-    - a hole on the cage arm that's on the top side of the baffle
+    - a large sway-back arm with two tangs at the top of mount,
+    - a hole on the cage arm that's on the top side of the baffle, and,
     - two short tangs on the bottom of the mount and a narrow slot between them
-      that fits the case's tab
+      that fits the case's tab.
 
     It's also a good time to verify that your bolt fits thru the hole in the cage
     arm on the mount and in the hole in drive cage bottom.
