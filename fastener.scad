@@ -205,7 +205,7 @@ module fastener_demo(_i=0,_pos=0, $fn=20) {
     spec = fastener_get_spec( fastener_specifications[_i][0] );
 
     echo( fastener_get_attribute( spec, "name" ) );
-    // Sanityf check thread pitch
+    // Sanity check thread pitch
     //echo( fastener_get_attribute( spec, "name" ), fastener_get_attribute( spec, "thread_pitch" ), fastener_get_attribute( spec, "thread_spec" ), thread_specs( str(fastener_get_attribute( spec, "thread_spec" ),"-ext") )[0] );
 
     // Vertical spacing between components
