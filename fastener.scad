@@ -1,5 +1,5 @@
 //
-// Copyright (c) Stewart H. Whitman, 2022.
+// Copyright (c) Stewart H. Whitman, 2022-2024.
 //
 // File:    fastener.scad
 // Project: General
@@ -51,9 +51,9 @@ use <MCAD/regular_shapes.scad>
 //   fender_washer_inner_diameter -
 //   fender_washer_outer_diameter -
 //   fender_washer_thickness -
-//   head_thickness -
-//   head_thickness_max -
-//   head_thickness_min -
+//   nut_thickness -
+//   nut_thickness_max -
+//   nut_thickness_min -
 //
 
 // fastener_get_spec:
@@ -136,12 +136,12 @@ module fastener_hex_bolt( s, length, shank=0 ) {
 
 // fastener_hex_nut:
 //
-// Model of hex nut from specification <s>.
+// Model of hex nut from specification <s> of <thickness> (or spec default).
 //
-module fastener_hex_nut( s ) {
+module fastener_hex_nut( s, thickness = 0 ) {
   spec = _fastener_get_spec_from_string(s);
 
-  nut_thickness       = fastener_get_attribute( spec, "nut_thickness" );
+  nut_thickness       = thickness > 0 ? thickness : fastener_get_attribute( spec, "nut_thickness" );
   head_across_flats   = fastener_get_attribute( spec, "head_across_flats" );
   thread_pitch        = fastener_get_attribute( spec, "thread_pitch" );
   thread_spec         = fastener_get_attribute( spec, "thread_spec" );
@@ -161,12 +161,12 @@ module fastener_hex_nut( s ) {
 
 // fastener_washer:
 //
-// Model of fender washer from specification <s>.
+// Model of fender washer from specification <s> of <thickness> (or spec default).
 //
-module fastener_washer( s ) {
+module fastener_washer( s, thickness = 0 ) {
   spec = _fastener_get_spec_from_string(s);
 
-  washer_thickness      = fastener_get_attribute( spec, "washer_thickness" );
+  washer_thickness      = thickness > 0 ? thickness : fastener_get_attribute( spec, "washer_thickness" );
   washer_inner_diameter = fastener_get_attribute( spec, "washer_inner_diameter" );
   washer_outer_diameter = fastener_get_attribute( spec, "washer_outer_diameter" );
 
@@ -179,12 +179,12 @@ module fastener_washer( s ) {
 
 // fastener_fender_washer:
 //
-// Model of fender washer from specification <s>.
+// Model of fender washer from specification <s> of <thickness> (or spec default).
 //
-module fastener_fender_washer( s ) {
+module fastener_fender_washer( s, thickness = 0 ) {
   spec = _fastener_get_spec_from_string(s);
 
-  fender_washer_thickness      = fastener_get_attribute( spec, "fender_washer_thickness" );
+  fender_washer_thickness      = thickness > 0 ? thickness : fastener_get_attribute( spec, "fender_washer_thickness" );
   fender_washer_inner_diameter = fastener_get_attribute( spec, "fender_washer_inner_diameter" );
   fender_washer_outer_diameter = fastener_get_attribute( spec, "fender_washer_outer_diameter" );
 
