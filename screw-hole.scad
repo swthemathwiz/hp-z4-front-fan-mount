@@ -52,7 +52,7 @@ if( false ) {
   translate( [0,+30,0] )
   difference() {
     cube( [100,20,5] );
-      for( i = [1:9] ) screw_hole( [i*10,10], height=5, diameter=i*.8, countersink=true, countersink_top=false );
+      for( i = [1:9] ) screw_hole( [i*10,10], height=5, diameter=i*.8, countersink=true, countersink_top=true );
   }
   translate( [0,+60,0] )
   difference() {
