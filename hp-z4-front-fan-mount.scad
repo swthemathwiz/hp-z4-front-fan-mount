@@ -1,5 +1,5 @@
 //
-// Copyright (c) Stewart H. Whitman, 2022.
+// Copyright (c) Stewart H. Whitman, 2022-2024.
 //
 // File:    hp-z4-front-fan-mount.scad
 // Project: HP Z4 G4 Fan Mount
@@ -11,6 +11,7 @@ include <smidge.scad>;
 include <rounded.scad>;
 include <fan.scad>;
 include <fastener.scad>;
+include <screw-hole.scad>;
 
 use <hp-z4-catch-bottom.scad>;
 use <hp-z4-catch-top.scad>;
@@ -254,34 +255,6 @@ module show_machine(axis=false,transparency=0.25) {
       rotate( [ 90, 180, 0 ] )
         bottom_catch_fitting( height=0, tang_style="debug", tab_style="debug" );
 } // end show_machine
-
-// hole: hole drilled at p with <height> and <diameter> with optional countersink
-module hole( position, height, diameter, countersink=false, countersink_multiplier=2.25, countersink_top=false ) {
-  assert( is_list(position) && (len(position) == 2 || len(position) == 3) );
-  assert( is_num(height) );
-  assert( is_num(diameter) && diameter >= 0 );
-
-  p = len(position) == 2 ? concat( position, 0 ) : position;
-  r = countersink_top ? [ 0, 180, 0 ]           : [ 0, 0, 0 ];
-  t = countersink_top ? [ 0, 0, height+SMIDGE ] : [ 0, 0, -SMIDGE ];
-
-  // orient and place
-  translate( p + t ) rotate( r ) {
-    // hole itself
-    cylinder( h=height+2*SMIDGE, d=diameter );
-
-    // countersink (45 degrees)
-    if( countersink && countersink_multiplier > 1 ) {
-      countersink_diameter = countersink_multiplier*diameter;
-
-      // intersect with hole height to prevent overrun
-      intersection() {
-	cylinder( h=countersink_diameter/2+2*SMIDGE, d1=countersink_diameter, d2=0 );
-	cylinder( h=height+2*SMIDGE, d=countersink_diameter );
-      }
-    }
-  }
-} // end hole
 
 // foreach_side: rotate thru 90 degrees 0, 1, 2, 3 in mask
 module foreach_side( mask ) {
@@ -554,7 +527,7 @@ module baffle() {
 
     // Fan mounting holes (possibly countersunk)
     for( p = fan_screw_hole_positions )
-      hole( p, baffle_thickness, baffle_screw_hole_diameter, baffle_screw_hole_countersink, 1.5, false );
+      screw_hole( p, baffle_thickness, baffle_screw_hole_diameter, baffle_screw_hole_countersink, 1.5, false );
 
     // Air-hole cutout
     air_hole_deletion();
