@@ -1,5 +1,5 @@
 #
-# Copyright (c) Stewart H. Whitman, 2022.
+# Copyright (c) Stewart H. Whitman, 2022-2024.
 #
 # File:    Makefile
 # Project: HP Z4 G4 Fan Mount
@@ -18,7 +18,8 @@ SRCS = \
 	hp-z4-catch-bottom.scad \
 	hp-z4-catch-top.scad \
 	arm.scad \
-	fasteners.scad \
+	screw-hole.scad \
+	fastener.scad \
 	fan.scad \
 	hash.scad \
 	pair.scad \
