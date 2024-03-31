@@ -135,7 +135,7 @@ module arm_tapered( size, base_profile, tip_profile, tang_profile, straight_perc
       translate( [0,0,-SMIDGE] ) {
         total_size       = size + [ tang_length(), tang_height ];
 
-	// Adjust clipping so that tip width is the same wether there is a tang or not
+	// Adjust clipping so that tip width is the same whether there is a tang or not
         left_base_width  = weight_left*base_width;
         left_tip_width   = tip_width/2 - tang_length() * (left_base_width  - tip_width/2) / size.x;
         right_base_width = weight_right*base_width;
