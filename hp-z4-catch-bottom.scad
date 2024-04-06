@@ -1,5 +1,5 @@
 //
-// Copyright (c) Stewart H. Whitman, 2022.
+// Copyright (c) Stewart H. Whitman, 2022-2024.
 //
 // File:    hp-z4-catch-bottom.scad
 // Project: HP Z4 G4 Fan Mount
@@ -186,7 +186,7 @@ module bottom_catch_base( style, height, width ) {
 
     expanded_size = [ size.x, size.y ] + 2*[front_expansion,front_expansion];
     linear_extrude( height=size.z, scale = [ size.x/expanded_size.x, size.y/expanded_size.y ]  )
-      rounded_side_square( expanded_size, radius, center=true );
+      rounded_side_square( expanded_size, bottom_catch_radius, center=true );
   }
   // trap-both:
   else if( style == "trap-both" ) {
