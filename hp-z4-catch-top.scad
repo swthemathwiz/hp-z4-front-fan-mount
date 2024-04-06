@@ -1,5 +1,5 @@
 //
-// Copyright (c) Stewart H. Whitman, 2022.
+// Copyright (c) Stewart H. Whitman, 2022-2024.
 //
 // File:    hp-z4-catch-top.scad
 // Project: HP Z4 G4 Fan Mount
@@ -22,8 +22,8 @@ top_catch_radius = 1;
 // Slot:
 //
 // Two slots, centered atop the long axis and positioned
-// symmetrically about the vertical center. Depth is space
-// below mount.
+// symmetrically about the vertical center. Depth is the
+// amount of "safe" space behind metal.
 //
 // top_slot_size: length, width, depth
 top_slot_size = [ 11, 6, 11 ];
@@ -45,7 +45,6 @@ top_tang_multiplier = 0.97;
 
 // top_catch_rounded_hollow: rounded hollow cube
 module top_catch_rounded_hollow( size, radius, thickness ) {
-echo( size.z );
   difference() {
     rounded_side_cube_upper( size, top_catch_radius/3);
     translate( [0,0,-SMIDGE] )
