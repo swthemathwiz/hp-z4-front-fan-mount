@@ -1,5 +1,5 @@
 //
-// Copyright (c) Stewart H. Whitman, 2022.
+// Copyright (c) Stewart H. Whitman, 2022-2024.
 //
 // File:    fan.scad
 // Project: General
@@ -36,11 +36,16 @@ include <hash.scad>;
 //
 
 // Attributes:
+//
 //   Computer Standard:
-//     side  - Frame size square (mm)
+//     side - Frame size square (mm)
 //     width - Frame width (mm)
 //     screw_hole_diameter - Diameter of mounting hole (mm)
 //     screw_hole_side - Side of mounting holes center square (mm)
+//
+//   Convenience:
+//     area - Vector [ side, side ] (mm)
+//     volume - Vector [ side, side, width ] (mm)
 //
 //   Non-Standard:
 //     frame-thickness - Thickness of frame structure (mm)
@@ -137,6 +142,8 @@ fan_specifications = [
     [ "name", "80x80x25" ],
     [ "side", 80.0 ],
     [ "width", 25.4 ],
+    [ "area", [ 80.0, 80.0 ] ],
+    [ "volume", [ 80.0, 80.0, 25.4 ] ],
     [ "screw_hole_diameter", 4.5 ],
     [ "screw_hole_side", 71.5 ],
     [ "frame_thickness", 4 ],
@@ -152,6 +159,8 @@ fan_specifications = [
     [ "name", "92x92x25" ],
     [ "side", 92.0 ],
     [ "width", 25.4 ],
+    [ "area", [ 92.0, 92.0 ] ],
+    [ "volume", [ 92.0, 92.0, 25.4 ] ],
     [ "screw_hole_diameter", 4.5 ],
     [ "screw_hole_side", 82.5 ],
     [ "frame_thickness", 4 ],
@@ -168,6 +177,8 @@ fan_specifications = [
     [ "name", "120x120x25" ],
     [ "side", 120.0 ],
     [ "width", 25.4 ],
+    [ "area", [ 120.0, 120.0 ] ],
+    [ "volume", [ 120.0, 120.0, 25.4 ] ],
     [ "screw_hole_diameter", 4.5 ],
     [ "screw_hole_side", 105.0 ],
     [ "frame_thickness", 5 ],
