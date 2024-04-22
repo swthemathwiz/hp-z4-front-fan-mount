@@ -18,6 +18,7 @@ SRCS = \
 	hp-z4-catch-bottom.scad \
 	hp-z4-catch-top.scad \
 	arm.scad \
+	expo.scad \
 	screw-hole.scad \
 	fastener.scad \
 	fan.scad \
