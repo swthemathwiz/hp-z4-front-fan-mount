@@ -70,7 +70,7 @@ baffle_extra_height = 5; // [1:0.1:5]
 baffle_total_area   = fan_frame_area + 2*[baffle_extra_side,baffle_extra_side];
 baffle_total_size   = concat( baffle_total_area, baffle_thickness+baffle_extra_height );
 
-// Decorative radius around baffle (percentage)
+// Decorative radius around baffle (mm)
 baffle_radius = 2; // [0:0.5:5]
 
 // Air hole at fan outlet matching slant (degrees)
@@ -84,7 +84,7 @@ baffle_screw_hole_countersink = !baffle_screw_hole_oversize;
 // Extra space between fan and baffle (mm per side)
 baffle_fan_spacing_side = 0.4; // [0.1:0.1:1]
 
-// Decorative radius in space between fan and baffle (percentage)
+// Decorative radius in space between fan and baffle (mm)
 baffle_fan_spacing_radius = 0.5; // [0:0.1:2]
 
 // Extra space cut out baffle for fan
