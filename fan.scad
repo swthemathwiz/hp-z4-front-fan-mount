@@ -110,6 +110,26 @@ function fan_get_screw_positions(spec) = let ( screw_hole_side = fan_get_attribu
       [ x, y ]
 ]; // end fan_get_screw_positions
 
+// fan_get_screw_count:
+//
+// Returns the number of screws on the fan front.
+//
+function fan_get_screw_count(spec) = len( fan_get_screw_positions(spec) );
+
+// fan_get_min_screw_to_side_distances:
+//
+// Returns list of the minimal distances from each mounting hole centers
+// to its nearest side as a vector.
+//
+function fan_get_min_screw_to_side_distances( spec ) = let( area = fan_get_attribute( spec, "area" )/2, pos = fan_get_screw_positions( spec ) )
+     [ for( p = pos ) min( abs( p.x - -area.x ), abs( +area.x - p.x ), abs( p.x - -area.y ), abs( area.y - p.y ) ) ];
+
+// fan_get_min_screw_to_side_distance:
+//
+// Returns minimum distance any side to any mounting hole center.
+//
+function fan_get_min_screw_to_side_distance( spec ) = min( fan_get_min_screw_to_side_distances( spec ) );
+
 // fan_demo:
 //
 // Display fan models
@@ -117,18 +137,17 @@ function fan_get_screw_positions(spec) = let ( screw_hole_side = fan_get_attribu
 module fan_demo( _i = 0, _pos = 0 ) {
   if( _i < len(fan_specifications) ) {
     spec  = fan_get_spec( fan_specifications[_i][0] );
-    side  = fan_get_attribute( spec, "side" );
-    width = fan_get_attribute( spec, "width" );
+    vol   = fan_get_attribute( spec, "volume" );
 
     demo_spacing = 30;
 
-    translate( [ side/2, _pos, side/2 ] )
+    translate( [ vol.x/2, _pos, vol.y/2 ] )
       rotate( [ 90, 0, 0 ] ) {
-        //translate( [ -side/2, -side/2, 0 ] ) color( "yellow", 0.1 ) cube( [side, side,width] );
+        //color( "yellow", 0.1 ) translate( [ -vol.x/2, -vol.y/2, 0 ] ) cube( vol );
 	fan_model( spec );
       }
 
-    fan_demo( _i + 1, _pos + width + demo_spacing );
+    fan_demo( _i + 1, _pos + vol.z + demo_spacing );
   }
 } // end fan_demo
 
@@ -147,11 +166,45 @@ fan_specifications = [
     [ "screw_hole_diameter", 4.5 ],
     [ "screw_hole_side", 71.5 ],
     [ "frame_thickness", 4 ],
-    [ "air_hole_side", 76.5 ],
-    [ "air_hole_diameter", 84 ],
+    [ "air_hole_side", 77.5 ],
+    [ "air_hole_diameter", 87 ],
     [ "model", [
       [ "filename", "Delta-AFB0812HH.STL" ],
       [ "rotation", [ -90, 0, 0 ] ]
+    ] ]
+  ] ],
+  // Non-Standard - 80x80x20mm fan
+  [ "80x80x20", [
+    [ "name", "80x80x20" ],
+    [ "side", 80.0 ],
+    [ "width", 20.0 ],
+    [ "area", [ 80.0, 80.0 ] ],
+    [ "volume", [ 80.0, 80.0, 20.0 ] ],
+    [ "screw_hole_diameter", 4.5 ],
+    [ "screw_hole_side", 71.5 ],
+    [ "frame_thickness", 4 ],
+    [ "air_hole_side", 77.5 ],
+    [ "air_hole_diameter", 87 ],
+    [ "model", [
+      [ "filename", "Delta-AFB0812HHD-A.STL" ],
+      [ "rotation", [ +90, 0, 0 ] ]
+    ] ]
+  ] ],
+  // Non-Standard - 80x80x15mm fan
+  [ "80x80x15", [
+    [ "name", "80x80x15" ],
+    [ "side", 80.0 ],
+    [ "width", 15.0 ],
+    [ "area", [ 80.0, 80.0 ] ],
+    [ "volume", [ 80.0, 80.0, 15.0 ] ],
+    [ "screw_hole_diameter", 4.5 ],
+    [ "screw_hole_side", 71.5 ],
+    [ "frame_thickness", 3 ],
+    [ "air_hole_side", 77.5 ],
+    [ "air_hole_diameter", 87 ],
+    [ "model", [
+      [ "filename", "Delta-AFB0812HB.STL" ],
+      [ "rotation", [ +90, 0, 0 ] ]
     ] ]
   ] ],
   // Standard - 92x92x25mm fan
