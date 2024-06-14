@@ -12,6 +12,7 @@ include <rounded.scad>;
 include <fan.scad>;
 include <fastener.scad>;
 include <screw-hole.scad>;
+include <line.scad>;
 
 use <hp-z4-catch-bottom.scad>;
 use <hp-z4-catch-top.scad>;
@@ -110,6 +111,29 @@ baffle_side_cutout_size = concat( baffle_side_cutout_area, min( baffle_extra_hei
 
 // Mini brace size (mm)
 baffle_mini_brace_size = 2.5; // [0:0.5:4]
+
+/* [Grill] */
+
+// Create a grill
+grill_add = false;
+
+// Layout grills of different fan sizes geometrically similar
+grill_normalize = false;
+
+// Thickness of grill (mm)
+grill_thickness = min( baffle_thickness, 2.0 ); // [1:0.1:5];
+
+// Width of the lines of the grill (mm)
+grill_line_width = 2.2; // [1:0.1:5];
+
+// Distance between concentric circles (mm)
+grill_step_distance = 11.6; // [5:0.2:20]
+
+// Number of supporting ribs
+grill_ribs = 6; // [4:1:8]
+
+// Starting angle of rib pattern - polar standard (degrees)
+grill_rib_start_angle = 105; // [0:5:360]
 
 /* [Machine Locations and Sizes] */
 
@@ -485,6 +509,50 @@ module air_hole_deletion() {
 	}
 } // end air_hole_deletion
 
+// replicate_n: Replicate elements at a <distance> from the origin, rotated <theta> degrees
+module replicate_n( n, distance = 0 ) {
+  theta = 360/n;
+  for( i = [0:n-1] )
+    translate( concat( polar_to_cartesian( theta*i, distance ), 0 ) )
+      rotate( [ 0, 0, theta*i ] )
+        children();
+} // end replicate_n
+
+// fan_grill:
+//
+// Create a grill for a fan
+//
+module fan_grill( fan_spec, thickness, convexity=10 ) {
+  fan_area = fan_get_attribute( fan_spec, "area" );
+
+  // Normalize resemblance to 80-mm fan
+  step_distance = grill_normalize ? (grill_step_distance * max( fan_area ) / 80 ) : grill_step_distance;
+
+  // Concentric circle parameters
+  circle_count        = ceil( min( fan_area ) / 2 / step_distance );
+  circle_start_radius = step_distance/2;
+
+  // Ribs parameters
+  rib_max_length = norm( fan_area ) / 2;
+
+  linear_extrude( height=thickness, convexity=convexity ) {
+    intersection() {
+      // Delete any overflow
+      square( fan_area, center=true );
+
+      union() {
+        // Concentric circles
+        for( i = [1:circle_count] )
+          line_circular( circle_start_radius + (i-1) * step_distance, grill_line_width );
+
+        // Ribs
+        replicate_n( grill_ribs )
+          line_ray( grill_rib_start_angle, circle_start_radius, rib_max_length, grill_line_width );
+      }
+    }
+  }
+} // end fan_grill
+
 // baffle:
 //
 // Creates the squarish baffle with all its attachments.
@@ -493,27 +561,38 @@ module baffle() {
   difference() {
     union() {
       difference() {
-	// Baffle frame
-	rounded_side_cube_upper( baffle_total_size, baffle_radius );
+	union() {
+	  difference() {
+	    // Baffle frame
+	    rounded_side_cube_upper( baffle_total_size, baffle_radius );
 
-	// Mostly decorative beveled cutback on 3-sides of frame
-	if( baffle_side_cutout_percentage > 0 && baffle_side_cutout_size.z > 0 ) {
-          h = fan_frame_width;
-	  foreach_side( [0,1,3] )
-	    translate( [0,baffle_side_cutout_size.y/2,baffle_total_size.z+h+SMIDGE] )
-	      rotate( [180,0,0] )
-                beveled_cube( baffle_side_cutout_size + [2*SMIDGE,2*SMIDGE,h+SMIDGE] );
-	 }
+	    // Mostly decorative beveled cutback on 3-sides of frame
+	    if( baffle_side_cutout_percentage > 0 && baffle_side_cutout_size.z > 0 ) {
+	      h = fan_frame_width;
+	      foreach_side( [0,1,3] )
+		translate( [0,baffle_side_cutout_size.y/2,baffle_total_size.z+h+SMIDGE] )
+		  rotate( [180,0,0] )
+		    beveled_cube( baffle_side_cutout_size + [2*SMIDGE,2*SMIDGE,h+SMIDGE] );
+	     }
+	  }
+
+	  // Attach the cage arm
+	  cage_arm_attach();
+
+	  // Attach the bottom catch interface
+	  bottom_catch_attach();
+
+	  // Attach the top catch interface
+	  top_catch_attach();
+	}
+
+	// Air-hole cutout
+	air_hole_deletion();
       }
 
-      // Attach the cage arm
-      cage_arm_attach();
-
-      // Attach the bottom catch interface
-      bottom_catch_attach();
-
-      // Attach the top catch interface
-      top_catch_attach();
+      // Add the grill after air-hole deletion and before body/hole deletion
+      if( grill_add )
+	fan_grill( fan_spec, grill_thickness );
     }
 
     // Slightly-oversized fan mount cutout
@@ -528,9 +607,6 @@ module baffle() {
     // Fan mounting holes (possibly countersunk)
     for( p = fan_screw_hole_positions )
       screw_hole( p, baffle_thickness, baffle_screw_hole_diameter, baffle_screw_hole_countersink, 1.5, false );
-
-    // Air-hole cutout
-    air_hole_deletion();
 
     // Arm hole
     cage_arm_hole_deletion();

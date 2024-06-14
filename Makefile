@@ -14,6 +14,7 @@ PNGCRUSH = pngcrush -brute
 
 SRCS = \
 	hp-z4-front-fan-mount.scad \
+	hp-z4-front-fan-mount-with-grill.scad \
 	hp-z4-front-fan-hardware.scad \
 	hp-z4-catch-bottom.scad \
 	hp-z4-catch-top.scad \
@@ -24,11 +25,14 @@ SRCS = \
 	fan.scad \
 	hash.scad \
 	pair.scad \
+	line.scad \
+	polar.scad \
 	rounded.scad \
 	smidge.scad \
 
 BUILDS = \
 	hp-z4-front-fan-mount.scad \
+	hp-z4-front-fan-mount-with-grill.scad \
 	hp-z4-front-fan-hardware.scad \
 
 EXTRAS = \
