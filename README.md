@@ -10,16 +10,26 @@ Also, the author is not responsible for any damage resulting from its use.
 
 ## Model and Parts
 
-There are two models included:
+There are three models included:
 
 <div class="model" data-name="HP Z4 G4 Front Fan Mount" data-icon-size="128" data-left-icon="hp-z4-front-fan-mount.icon.png" data-left="hp-z4-front-fan-mount.stl"><!-- expanded by annotate-model --><table align="center" width="100%"><tbody><tr width="100%"><td align="center" width="160" height="160"><a href="../media/media/hp-z4-front-fan-mount.stl" target="_blank" title="View HP Z4 G4 Front Fan Mount Model"><img src="../media/media/hp-z4-front-fan-mount.icon.png" alt="HP Z4 G4 Front Fan Mount Model" width="128" height="128" /></a></td><td>
 
 ### HP Z4 G4 Front Fan Mount
 
-The fan mount for an HP 92 mm case fan. It is installed below the drive
+The fan mount for an HP 92-mm case fan. It is installed below the drive
 cage in the front bottom part of an HP Z4 G4 workstation and is required
-by the BIOS when certain devices are present (e.g. power graphics cards,
+by the BIOS when certain devices are present (e.g. powerful graphics cards,
 M.2 drives, etc.).
+
+</td></tr></tbody></table></div>
+
+<div class="model" data-name="HP Z4 G4 Front Fan Mount (with Grill)" data-icon-size="128" data-left-icon="hp-z4-front-fan-mount-with-grill.icon.png" data-left="hp-z4-front-fan-mount-with-grill.stl"><!-- expanded by annotate-model --><table align="center" width="100%"><tbody><tr width="100%"><td align="center" width="160" height="160"><a href="../media/media/hp-z4-front-fan-mount-with-grill.stl" target="_blank" title="View HP Z4 G4 Front Fan Mount (with Grill) Model"><img src="../media/media/hp-z4-front-fan-mount-with-grill.icon.png" alt="HP Z4 G4 Front Fan Mount (with Grill) Model" width="128" height="128" /></a></td><td>
+
+### HP Z4 G4 Front Fan Mount (with Grill)
+
+The fan mount for an HP 92-mm case fan with a built-in grill. Except for
+including a printed grill (and countersunk screw holes), it is identical
+to the standard mount.
 
 </td></tr></tbody></table></div>
 
@@ -64,7 +74,7 @@ of HP's case fans - especially the newer ones - have ultra-short cables.
 
 <img src="../media/media/guard.jpg" alt="Fan Guard" align="right" width="180px" height="180px" />
 
-This is essential - i.e., it's not just for your protection\! The fan guard
+A fan guard is needed if you print the model without the grill. The fan guard
 bolts the baffle to the fan and keeps the structure square and strong. Setting
 aside color choice, you want a metal one (not plastic). Some are flat, some
 bulge a little. Silver wire with a bulge matched my CPU fan.
@@ -101,8 +111,8 @@ tangs, two under the top tangs, one under the screw arm, and a small horizontal
 top-front piece at the start of the top arms). Clean-up the print with utility
 knife.
 
-As mentioned above, you can print the hardware pack. Use **infill density
-of 100%** if you choose to do this.
+As mentioned above, you can print the hardware pack. Use **layer height of 0.12 mm**
+and **infill density of 100%** if you choose to do this.
 
 ## Installation
 
@@ -110,7 +120,7 @@ of 100%** if you choose to do this.
 
 2.  Check your new fan electrically to ensure that it works by connecting it
     and turning the computer on/off briefly. The connector goes to the
-    white 4-pin connector at the very front-bottom of the mainboard.
+    white 4-pin connector at the very front-bottom of the motherboard.
 
 3.  Remove the bottom drive from the drive cage. You'll need the space.
 
@@ -162,13 +172,14 @@ of 100%** if you choose to do this.
     of a front case fan on your HP Z4\! Actually, it really is rather
     tepid, so if you want to test higher speeds, reboot into the BIOS
     Setup → Advanced → Built-In Device Options → Increase Idle Fan
-    Speed(%) → 90 to create a small hurricane.
+    Speed(%) → 100 to create a small tornado :tornado:.
 
 ## Source
 
-The fan mount is built using OpenSCAD. *hp-z4-front-fan-mount.scad* is the main
-file for the model. *hp-z4-front-fan-hardware.scad* builds the hardware
-package.
+The fan mount is built using OpenSCAD. *hp-z4-front-fan-mount.scad* is
+the main file for the mount. *hp-z4-front-fan-mount-with-grill.scad*
+builds the model with the grill. *hp-z4-front-fan-hardware.scad* builds
+the hardware package.
 
 ### Libraries
 
