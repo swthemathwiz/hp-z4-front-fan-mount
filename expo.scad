@@ -1,5 +1,5 @@
 //
-// Copyright (c) Stewart H. Whitman, 2022.
+// Copyright (c) Stewart H. Whitman, 2022-2024.
 //
 // File:    expo.scad
 // Project: General

@@ -1,5 +1,5 @@
 //
-// Copyright (c) Stewart H. Whitman, 2021-2022.
+// Copyright (c) Stewart H. Whitman, 2021-2024.
 //
 // File:    smidge.scad
 // Project: General
