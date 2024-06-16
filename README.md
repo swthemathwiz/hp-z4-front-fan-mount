@@ -42,23 +42,33 @@ attaches the fan mount to the bottom of the drive cage.
 
 </td></tr></tbody></table></div>
 
+## A Note on HP Workstation 4-Pin Fan Connectors
+
+The "standard" 4-pin HP Workstation fan connector is somewhat proprietary mechanically. Older fans tend
+to have four color-coded wires and a reddish-brown connector (e.g. [JWT A2548H00-4P](http://www.jwt.com.tw/pro_pdf/A2548.pdf)).
+Newer fans come with black wires and a white connector (e.g. [Molex 22-01-3047](https://www.molex.com/en-us/products/part-detail/22013047)).
+These connectors are polarized - both ends of the connector have small ribs. They differ from
+4-pin PC-style PWM fans which have a 3+1 keying (see [Molex 47054-1000](https://www.molex.com/en-us/products/part-detail/470541000)).
+
+Electrically, PC- and HP-style signals are compatible and are in the
+same order: Ground, +12 VDC, RPM Sense, PWM Control.
+
+If you want to connect a PC-style PWM fan to an HP-style motherboard
+header, you need to modify the connector. You can do this either by
+shaving the middle key on the PC-style connector or by transplanting the
+terminals to an HP-style connector.
+
 ## What You'll Need
 
 ### One 92 mm x 25 mm HP-Compatible Fan
 
 <img src="../media/media/fan.jpg" alt="Fan" align="right" width="250px" height="250px" />
 
-Generally, you'll want to buy (or scavenge) an HP-compatible PWM 12VDC fan that
-has the HP-specific 4-pin connector and a cable length of at least 6 inches.
-
-The HP fan connector is somewhat proprietary. Older fans tend to have
-four color-coded wires and a reddish-brown connector. Newer ones seem to have black
-wires and a white connector. Both connectors are keyed on both ends of
-the 4-pin connector. If you use an after-market fan, at a minimum, you'll have
-to modify the connector to accommodate the HP-style.
-
-I picked up a Foxconn PV902512PSPF from ebay that was originally used on a
-HP/Compaq computer and it works great. Here are some choices I saw:
+Generally, you'll want to buy (or scavenge) an HP-compatible PWM +12 VDC
+fan that has the HP-specific 4-pin connector and a cable length of at
+least 6 inches.  I picked up a Foxconn PV902512PSPF from ebay that was
+originally used on a HP/Compaq computer and it works great. Here are
+some choices I saw:
 
 - Foxconn PV902512PSPF (0.40A) from HP/Compaq DCxx00 (HP: 435452-001, 432768-001, 451144-001)
 - Nidec T92T12MS3A7-57A03 (0.35A) from the Zxx0 series (HP: 647113-001 Rev. B, 749598-001, and 782506-001)
@@ -66,9 +76,10 @@ HP/Compaq computer and it works great. Here are some choices I saw:
 - Foxconn PVA092G12H (0.40A) from the Z2x0 series (HP: 727135-001)
 - Delta AUB0912HH (0.40A) (HP: 411456-001)
 
-I have not tested the other fans. Given that both 0.60A and 0.35A fans are used
-as front fans in the Z440, I think any of these will do the job. Beware: some
-of HP's case fans - especially the newer ones - have ultra-short cables.
+I have not tested the other fans. Given that both 0.60A and 0.35A fans
+are used as front fans in the Z440, I think any of these will do the
+job. Beware: some of HP's case fans - especially the newer ones - have
+ultra-short cables.
 
 ### One 92 mm Fan Guard
 
